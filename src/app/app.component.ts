@@ -21,6 +21,8 @@ export class MyApp {
       backandService.setAppName('comlap');
       backandService.setSignUpToken('44b098f6-48c0-42e7-965f-f5474199be77');
       backandService.setAnonymousToken('ccfd582c-ece7-46c1-a552-1fa8ec61f71a');
+      backandService.signin('luis@123', '1234567');
     });
   }
+
 }

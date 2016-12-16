@@ -20,7 +20,7 @@ export const URLS = {
 }
 
 export const ERRORS = {
-    NO_EMAIL_SOCIAL_ERROR: 'NO_EMAIL_SOCIAL', 
+    NO_EMAIL_SOCIAL_ERROR: 'NO_EMAIL_SOCIAL',
     NOT_SIGNEDIN_ERROR: 'The user is not signed up to',
     ALREADY_SIGNEDUP_ERROR: 'The user already signed up to'
 };
@@ -45,15 +45,15 @@ import * as io from 'socket.io-client';
 @Injectable()
 export class BackandService {
 
-    private api_url: string = 'https://api.backand.com';  
+    private api_url: string = 'https://api.backand.com';
     private socialProviders: any = {
         github: {name: 'github', label: 'Github', url: 'www.github.com', css: 'github', id: 1},
         google: {name: 'google', label: 'Google', url: 'www.google.com', css: 'google-plus', id: 2},
         facebook: {name: 'facebook', label: 'Facebook', url: 'www.facebook.com', css: 'facebook', id: 3},
         twitter: {name: 'twitter', label: 'Twitter', url: 'www.twitter.com', css: 'twitter', id: 4}
-    }; 
+    };
     private dummyReturnAddress: string = 'http://www.backandkuku.com';
-    
+
     // configuration variables
     private app_name:string = 'your app name';
     private signUpToken: string = 'your signup token';
@@ -67,19 +67,19 @@ export class BackandService {
     private is_auth_error:boolean = false;
     private auth_token:{ header_name : string, header_value: string};
     private username: string;
-    
+
     private socialAuthWindow: any;
     private statusLogin: Subject<EVENTS>;
     private socket: SocketIOClient.Socket;;
 
     constructor(public http:Http) {
         if (this.setAuthenticationState()){
-            this.loginSocket(this.auth_token.header_value, 
+            this.loginSocket(this.auth_token.header_value,
                 this.anonymousToken, this.app_name);
         }
         else{
             this.auth_token = {header_name: '', header_value: ''};
-        }     
+        }
     }
 
     // configuration of SDK
@@ -106,9 +106,9 @@ export class BackandService {
         localStorage.setItem('signUpToken', signUpToken);
     }
 
-     
+
     // methods
-    public signin(username, password): Observable<any> {       
+    public signin(username, password): Observable<any> {
         let creds = `username=${username}` +
             `&password=${password}` +
             `&appName=${this.app_name}` +
@@ -135,7 +135,7 @@ export class BackandService {
                 () => console.log('Finish Auth'));
 
           return $obs;
-           
+
     }
 
 
@@ -158,7 +158,7 @@ export class BackandService {
                     localStorage.setItem('username', data.username);
                     localStorage.setItem('user', data);
                     this.loginSocket(data, this.anonymousToken, this.app_name);
-                    this.statusLogin.next(EVENTS.SIGNUP);   
+                    this.statusLogin.next(EVENTS.SIGNUP);
                 },
                 err => {
                     this.statusLogin.error(err);
@@ -166,7 +166,7 @@ export class BackandService {
                 () => console.log('Finish Auth'));
 
           return $obs;
-           
+
     }
 
     public signout() {
@@ -198,7 +198,7 @@ export class BackandService {
                 console.log(data);
             },
             err => {
-                console.log(err);  
+                console.log(err);
             },
             () => console.log('Finish Sign Up'));
 
@@ -224,21 +224,21 @@ export class BackandService {
                 console.log(data);
             },
             err => {
-              console.log(err);  
+              console.log(err);
             },
             () => console.log('Finish Change Password'));
 
         return $obs;
     }
 
-    public requestResetPassword(userName: string) { 
+    public requestResetPassword(userName: string) {
         let header = new Headers();
         header.append('Content-Type', 'application/x-www-form-urlencoded');
-        let data = { 
-            appName: this.app_name, 
+        let data = {
+            appName: this.app_name,
             username: userName
         };
-        return this.http.post(this.api_url + URLS.requestResetPassword, data, 
+        return this.http.post(this.api_url + URLS.requestResetPassword, data,
             {
                 headers: header
             }
@@ -252,7 +252,7 @@ export class BackandService {
             newPassword: newPassword,
             resetToken: resetToken
         };
-        return this.http.post(this.api_url +  URLS.resetPassword, data, 
+        return this.http.post(this.api_url +  URLS.resetPassword, data,
             {
                 headers: header
             }
@@ -262,27 +262,27 @@ export class BackandService {
 
     private socialSigninWithToken(provider, token): Observable<any> {
 
-        let url = this.api_url + URLS.socialLoginWithToken.replace('PROVIDER', provider) + 
-            "?accessToken=" + encodeURIComponent(token) + 
-            "&appName=" + encodeURI(this.app_name) + 
+        let url = this.api_url + URLS.socialLoginWithToken.replace('PROVIDER', provider) +
+            "?accessToken=" + encodeURIComponent(token) +
+            "&appName=" + encodeURI(this.app_name) +
             "&signupIfNotSignedIn=" + (this.callSignupOnSingInSocialError ? "true" : "false");
 
         this.signout();
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        let $obs = this.http.get(url, 
+        let $obs = this.http.get(url,
             {
-                headers: headers    
+                headers: headers
             }
         )
         .map(res => res.json());
-        
+
         $obs.subscribe(
-            data => {            
+            data => {
                 this.setTokenHeader(data.access_token);
                 localStorage.setItem('user', data);
                 this.loginSocket(data.access_token, this.anonymousToken, this.app_name);
-                this.statusLogin.next(EVENTS.SIGNUP);   
+                this.statusLogin.next(EVENTS.SIGNUP);
             },
             err => {
                 this.logError(err);
@@ -293,7 +293,7 @@ export class BackandService {
 
         return $obs;
 
-    } 
+    }
 
     public socialSignin(provider: string, spec: any = null, email: string = null) {
         return this.socialAuth(provider, false, spec, email);
@@ -303,53 +303,53 @@ export class BackandService {
         return this.socialAuth(provider, true, spec, email);
     }
 
-    private socialAuth(provider: string, isSignUp: boolean, spec: any = null, email: string = null) 
+    private socialAuth(provider: string, isSignUp: boolean, spec: any = null, email: string = null)
     {
         if (!this.statusLogin){
             this.statusLogin = new Subject<EVENTS>();
         }
-        
+
         if (!this.socialProviders[provider]) {
             throw Error('Unknown Social Provider');
         }
-        
-        if (this.isMobile) {                
+
+        if (this.isMobile) {
             let windowUrl = this.api_url + '/1/'
                 + this.getSocialUrl(provider, isSignUp)
                 + '&appname=' + this.app_name + (email ? ("&email=" + email) : '')
                 + '&returnAddress=' + this.dummyReturnAddress
-                + "&signupIfNotSignedIn=" + (this.callSignupOnSingInSocialError ? "true" : "false");                              
+                + "&signupIfNotSignedIn=" + (this.callSignupOnSingInSocialError ? "true" : "false");
             this.socialAuthWindow = window.open(
                 windowUrl,
                 spec || 'left=1, top=1, width=600, height=600');
-                       
-            let source = Observable.fromEvent(this.socialAuthWindow, 'loadstart')               
+
+            let source = Observable.fromEvent(this.socialAuthWindow, 'loadstart')
             source.subscribe((e: any) => {
 
                 if (e.url.indexOf(this.dummyReturnAddress) == 0) { // mean startWith
-                    
+
                     var url = e.url;
                     // handle case of misformatted json from server
                     if (url && url.indexOf('#_=_') > -1){
-                       url = url.slice(0, url.lastIndexOf('#_=_')); 
+                       url = url.slice(0, url.lastIndexOf('#_=_'));
                     }
-                    
+
                     url = decodeURI(url);
                     let breakdown = this.parseQueryString(url);
-                    
+
                     // error return from server
-                    if (breakdown.error) {                              
+                    if (breakdown.error) {
                         if (!isSignUp && this.callSignupOnSingInSocialError && breakdown.error.message.indexOf(ERRORS.NOT_SIGNEDIN_ERROR) > -1) {  // check is right error
                             this.socialAuth(provider, true, spec);
                         }
-                        if (breakdown.error.message.indexOf(ERRORS.ALREADY_SIGNEDUP_ERROR) > -1) {                            
+                        if (breakdown.error.message.indexOf(ERRORS.ALREADY_SIGNEDUP_ERROR) > -1) {
                             this.statusLogin.error(breakdown.error.message + ' (signing in with ' + breakdown.error.provider + ')');
                         }
                     }
                     else{
                         // login is OK
-                        let userData = breakdown.data;              
-                        this.signinWithToken(userData);                        
+                        let userData = breakdown.data;
+                        this.signinWithToken(userData);
                     }
 
                     try {
@@ -358,10 +358,10 @@ export class BackandService {
                     catch (err) {
                         console.log(err);
                     }
-                }              
+                }
              });
 
- 
+
         }
         else {
 
@@ -374,45 +374,45 @@ export class BackandService {
                 'id1',
                 spec || 'left=1, top=1, width=600, height=600'
                );
-          
+
             let source = Observable.fromEvent(window, 'message');
-            var subscription = source.subscribe((e: any) => {               
+            var subscription = source.subscribe((e: any) => {
 
                 // where does location come from ?
                 if (e.target.location.origin !== location.origin) {
                     return;
                 }
-                let data = e.data;                
+                let data = e.data;
 
-                // handle case of misformatted json from server   
+                // handle case of misformatted json from server
                 if (data && data.indexOf('#_=_') > -1){
-                    data = data.slice(0, data.lastIndexOf('#_=_')); 
+                    data = data.slice(0, data.lastIndexOf('#_=_'));
                 }
                 data = JSON.parse(data);
                 let error = data.error;
                 data = data.data;
-                
-                           
+
+
                 if (error) {
                     if (this.callSignupOnSingInSocialError && error.message.indexOf(ERRORS.NOT_SIGNEDIN_ERROR) > -1) {  // check is right error
                         this.socialAuth(provider, true, spec);
                     }
-                    if (isSignUp && error.message.indexOf(ERRORS.ALREADY_SIGNEDUP_ERROR) > -1) {                       
+                    if (isSignUp && error.message.indexOf(ERRORS.ALREADY_SIGNEDUP_ERROR) > -1) {
                         this.statusLogin.error(error.message + ' (signing in with ' + error.provider + ')');
                     }
                 }
-                else{                    
-                    // login is OK                   
-                    let userData = data;  
-                    this.signinWithToken(userData);                   
+                else{
+                    // login is OK
+                    let userData = data;
+                    this.signinWithToken(userData);
                 }
-                e.target.removeEventListener('message');   
+                e.target.removeEventListener('message');
                 this.socialAuthWindow.close();
-                this.socialAuthWindow = null; 
+                this.socialAuthWindow = null;
             });
-        } 
+        }
         return this.statusLogin;
-    } 
+    }
 
     public inAppSocial(provider: string) {
         if (this.isMobile){
@@ -421,15 +421,15 @@ export class BackandService {
                 this.statusLogin = new Subject<EVENTS>();
             }
             let permissions: string[] = ['public_profile', 'email'];
-            Facebook.login(permissions).then( 
+            Facebook.login(permissions).then(
                 function(data) {
                     console.log(data);
                     if (data.status.toLowerCase() == 'connected'){
                         let token: string = data.authResponse.accessToken;
-                        that.socialSigninWithToken(provider, token); 
+                        that.socialSigninWithToken(provider, token);
                     }
                     else{
-                       that.statusLogin.error(data.status); 
+                       that.statusLogin.error(data.status);
                     }
 
                 },
@@ -461,7 +461,7 @@ export class BackandService {
                 headers: this.authHeader
             })
             .retry(3)
-            .map(res => res.json());           
+            .map(res => res.json());
     }
 
     public update(object: string, id: string, item: any, deep: boolean = false, returnObject: boolean = false) {
@@ -480,19 +480,19 @@ export class BackandService {
                 headers: this.authHeader
             })
             .retry(3)
-            .map(res => res.json());           
+            .map(res => res.json());
     }
 
 
 
-    public getList(object: string, 
-        pageSize: number = null, 
-        pageNumber: number = null, 
-        filter: any = null, 
+    public getList(object: string,
+        pageSize: number = null,
+        pageNumber: number = null,
+        filter: any = null,
         sort: any = null,
-        deep: boolean = false, 
+        deep: boolean = false,
         search: string = null,
-        exclude: string[] = null, 
+        exclude: string[] = null,
         relatedObjects: boolean = false) {
         let query: string = '';
         let queryParams : string[] = [];
@@ -530,6 +530,7 @@ export class BackandService {
             })
             .retry(3)
             .map(res => res.json().data);
+
     }
 
     public getOne(object: string, id: string, deep: boolean = false, exclude: string[] = null, level: number = null) {
@@ -558,13 +559,13 @@ export class BackandService {
 
     public delete(object: string, id: string) {
         let headers = this.authHeader;
-        headers.append('Content-Type', 'application/json');  
+        headers.append('Content-Type', 'application/json');
         return this.http.delete(
             this.api_url + '/1/objects/' + object + '/' + id,
             {
                 headers: headers
             }
-        );   
+        );
     }
 
     public uploadFile(objectName: string, fileActionName: string, filename: string, filedata: string) {
@@ -576,26 +577,26 @@ export class BackandService {
         });
         return this.http.post(
             this.api_url + URLS.actionUrl +  objectName + '?name=' + fileActionName,
-            data, 
+            data,
             {
                 headers: headers
-            } 
+            }
         );
     }
 
     public deleteFile(objectName: string, fileActionName: string, filename: string) {
         let headers = this.authHeader;
-        headers.append('Content-Type', 'application/json');  
+        headers.append('Content-Type', 'application/json');
         return this.http.delete(
             this.api_url + URLS.actionUrl +  objectName + '?name=' + fileActionName + "&filename=" + filename,
             {
                 headers: headers
             }
-        );   
+        );
     }
 
     public loginSocket(token, anonymousToken, appName) {
-    
+
 
         this.socket = io.connect(URLS.socketUrl, {'forceNew':true });
 
@@ -692,7 +693,7 @@ export class BackandService {
             this.app_name = localStorage.getItem('app_name');
             this.anonymousToken = localStorage.getItem('anonymousToken');
             return true;
-        }    
+        }
         else{
             this.auth_token = {header_name: '', header_value: ''};
             return false;
@@ -723,7 +724,7 @@ export class BackandService {
         return JSON.parse(err._body).error_description;
     }
 
-    public useAnonymousAuth() {      
+    public useAnonymousAuth() {
         this.setAnonymousHeader();
     }
 

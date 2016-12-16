@@ -9,8 +9,8 @@ import {BackandService} from '../../providers/backandService'
 })
 export class LoginPage {
     
-    username:string = 'test@angular2.com';
-    password:string = 'angular2';
+    username:string = '';
+    password:string = '';
     auth_type:string = "N/A";
     is_auth_error:boolean = false;
     auth_status:string = null;

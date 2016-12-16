@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import { AlertController } from 'ionic-angular';
 // import {bootstrap} from '@angular/platform-browser-dynamic';
 //To do : limit imports
 import 'rxjs/Rx'
@@ -23,7 +24,7 @@ export class LoginPage {
     confirmNewPassword: string = '';
 
 
-    constructor(public backandService:BackandService) {
+    constructor(public backandService:BackandService,public alertCtrl: AlertController) {
 
         this.auth_type = backandService.getAuthType();
         this.auth_status = backandService.getAuthStatus();
@@ -61,9 +62,9 @@ export class LoginPage {
              this.items[i].password == this.password) failed = 1;
         }
         if (failed==1) {
-            alert('success');
+            this.showAlert('Success :D','The connection to the azure database has been successfull.');
         }
-        else{alert('failed');}
+        else{this.showAlert('Failed :O','The connection to the azure database hasnt success.');}
   }
 
 
@@ -71,6 +72,15 @@ export class LoginPage {
         this.auth_status = null;
         this.backandService.signout();
     }
+
+    showAlert(titlep:string,subTitlep:string) {
+    let alert = this.alertCtrl.create({
+      title: titlep,
+      subTitle: subTitlep,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
 
 
 

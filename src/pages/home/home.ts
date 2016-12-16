@@ -2,12 +2,12 @@ import {Component} from '@angular/core';
 import {BackandService} from '../../providers/backandService'
 
 @Component({
-  templateUrl: 'crud.html',
-  selector: 'page-crud'
+  templateUrl: 'home.html',
+  selector: 'page-home'
 })
-export class CrudPage {
-	name:string = 'World';
-    description:string = 'Wonderful';
+export class HomePage {
+	name:string = '';
+    description:string = '';
     public items:any[] = [];
     searchQuery: string;
 

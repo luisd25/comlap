@@ -3,7 +3,7 @@ import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
-import { CrudPage } from '../pages/crud/crud';
+import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { BackandService } from '../providers/backandService';
 
@@ -12,7 +12,7 @@ import { BackandService } from '../providers/backandService';
     MyApp,
     LoginPage,
     SignupPage,
-    CrudPage,
+    HomePage,
     TabsPage
   ],
   imports: [
@@ -23,7 +23,7 @@ import { BackandService } from '../providers/backandService';
     MyApp,
     LoginPage,
     SignupPage,
-    CrudPage,    
+    HomePage,
     TabsPage
   ],
   providers: [BackandService]

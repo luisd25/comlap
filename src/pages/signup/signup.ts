@@ -25,7 +25,7 @@ export class SignupPage {
       return;
     }
     var $obs = this.backandService.signup(this.email, this.signUpPassword, this.confirmPassword, this.firstName, this.lastName);
-    $obs.subscribe(                
+    $obs.subscribe(
       data => {
           alert('Sign up succeeded');
           this.email = this.signUpPassword = this.confirmPassword = this.firstName = this.lastName = '';
@@ -38,9 +38,9 @@ export class SignupPage {
 
   public socialSignin(provider) {
     var $obs = this.backandService.socialSignin(provider);
-    $obs.subscribe(                
+    $obs.subscribe(
         data => {
-            console.log('Sign up succeeded with:' + provider);           
+            console.log('Sign up succeeded with:' + provider);
         },
         err => {
             this.backandService.logError(err)
@@ -50,9 +50,9 @@ export class SignupPage {
 
   public inAppSocial(provider) {
     var $obs = this.backandService.inAppSocial(provider);
-    $obs.subscribe(                
+    $obs.subscribe(
         data => {
-            console.log('Sign up succeeded with:' + provider);           
+            console.log('Sign up succeeded with:' + provider);
         },
         err => {
             this.backandService.logError(err)

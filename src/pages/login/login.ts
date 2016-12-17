@@ -38,7 +38,7 @@ export class LoginPage {
             {
               fieldName: 'username',
               operator: 'contains',
-              value: 'luisd25'
+              value: this.username
             }
           ]
       ;

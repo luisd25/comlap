@@ -7,35 +7,36 @@
 
 <ion-content class="signup">
 <div class="header"><h1>Registro de Usuario</h1></div>
+<p>TODO: clean form, autologin, inforce security,upgrade title, use gender</p>
   <ion-list>
     <ion-item>
-      <ion-label floating>Name</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-label floating>FirstName</ion-label>
+      <ion-input type="text" (input)="firstName = $event.target.value"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label floating>Lastname</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" (input)="lastName = $event.target.value"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label floating>Username</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" (input)="userName = $event.target.value"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label floating>Email</ion-label>
-      <ion-input type="email"></ion-input>
+      <ion-input type="email" (input)="email = $event.target.value"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label floating>Password</ion-label>
-      <ion-input type="password"></ion-input>
+      <ion-input type="password" (input)="signUpPassword = $event.target.value"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label floating>Retype Password</ion-label>
-      <ion-input type="password"></ion-input>
+      <ion-label floating>Confirm Password</ion-label>
+      <ion-input type="password" (input)="confirmPassword = $event.target.value"></ion-input>
     </ion-item>
 </ion-list>
 
@@ -53,5 +54,7 @@
    </ion-item>
 
  </ion-list>
+ <button ion-button icon-left full (click)="register()" color="success">
+   <ion-icon name="home"></ion-icon> Register   </button>
 
 </ion-content>

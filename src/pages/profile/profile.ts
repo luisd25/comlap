@@ -14,7 +14,9 @@ import { AlertController } from 'ionic-angular';
 })
 export class ProfilePage {
   public currentUser:any[] = [];
-  // public username:string = '';
+  public userName:string = '';
+  public name:string = '';
+  public lastName:string = '';
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController) {}
 
@@ -24,6 +26,11 @@ export class ProfilePage {
       this.currentUser = this.navParams.get('user');
       // this.showAlert(this.items[0].username,'');
 
+    }
+    else{
+      this.userName = 'Luisd25';
+      this.name = 'Luis';
+      this.lastName = 'Dominguez';
     }
   }
   

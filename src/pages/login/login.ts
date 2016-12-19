@@ -22,10 +22,6 @@ export class LoginPage {
     auth_status:string = null;
     loggedInUser: string = '';
     public items:any[] = [];
-
-    oldPassword: string = '';
-    newPassword: string = '';
-    confirmNewPassword: string = '';
     profilePage = ProfilePage;
 
 

@@ -25,6 +25,8 @@
       </ion-avatar>
 
       <ion-list>
+        
+        <button ion-item class='username' disabled >{{this.userName}}</button>
         <button ion-item>Profile</button>
         <button ion-item>New Appointment</button>
         <button ion-item>List Of Apointment</button>
@@ -33,28 +35,35 @@
       </ion-list>
     </ion-content>
   </ion-menu>
-    
+  <ion-nav #mycontent [root]="rootPage"></ion-nav>
   <!--Page-->
-  
-  <ion-avatar class="profile_image">
-    <img class='profile' src="img/male-user.png">
-  </ion-avatar>
-
+    
+    <ion-avatar class="profile_image">
+      <img class='profile' src="img/male-user.png">
+    </ion-avatar>
  <ion-list>
    
         <ion-item>
-            <ion-label floating>Username</ion-label>
-            <ion-input type="text"  (input)="username = $event.target.value"></ion-input>
+            <ion-label floating>User Name</ion-label>
+            <ion-input type="text" value={{this.userName}} (input)="username = $event.target.value" disabled></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Name</ion-label>
+            <ion-input type="text" value={{this.name}} (input)="username = $event.target.value" disabled></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>LastName</ion-label>
+            <ion-input type="text" value={{this.lastName}} (input)="username = $event.target.value" disabled></ion-input>
         </ion-item>
 
-        <ion-item>
+        <!--<ion-item>
             <ion-label floating>Password</ion-label>
             <ion-input  (input)="password = $event.target.value" type="password"></ion-input>
-        </ion-item>
+        </ion-item>-->
 
     </ion-list>
 
 
 
-  <ion-nav #mycontent [root]="rootPage"></ion-nav>
+  
 </ion-content>

@@ -50,21 +50,9 @@ export class LoginPage {
                    this.items = data;
                },
                err => this.backandService.logError(err),
-               () => console.log('OK')
+               ()=> this.validateUser()
            );
-        // if(this.items[1].username == 'luisd26')alert('connect success');
-        // else{
-        //   alert('connect failed');
-        // }
-        let failed = 0;
-        for (let i = 0; i < this.items.length; i++) {
-          if(this.items[i].username == this.username &&
-             this.items[i].password == this.password) failed = 1;
-        }
-        if (failed==1) {
-            this.showAlert('Success :D','The connection to the azure database has been successfull.');
-        }
-        else{this.showAlert('Failed :O','The connection to the azure database hasnt success.');}
+
   }
 
 
@@ -80,6 +68,17 @@ export class LoginPage {
       buttons: ['OK']
     });
     alert.present();
+  }
+  validateUser(){
+        let failed = 0;
+        for (let i = 0; i < this.items.length; i++) {
+          if(this.items[i].username == this.username &&
+             this.items[i].password == this.password) failed = 1;
+        }
+        if (failed==1) {
+            this.showAlert('Success :D','The connection to the azure database has been successfull.');
+        }
+        else{this.showAlert('Failed :O','The connection to the azure database hasnt success.');}
   }
 
 

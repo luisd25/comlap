@@ -1,0 +1,60 @@
+
+<ion-header class="header">
+<ion-navbar>
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>
+      Profile
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <!--Menu-->
+  <ion-menu [content]="mycontent">
+    <ion-header>
+   <ion-toolbar>
+     <ion-title>Pages</ion-title>
+   </ion-toolbar>
+ </ion-header>
+    <ion-content>
+      <ion-avatar>
+        <img class='profile' src="img/male-user.png">
+      </ion-avatar>
+
+      <ion-list>
+        <button ion-item>Profile</button>
+        <button ion-item>New Appointment</button>
+        <button ion-item>List Of Apointment</button>
+        <button ion-item>Log Out</button>
+
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+    
+  <!--Page-->
+  
+  <ion-avatar class="profile_image">
+    <img class='profile' src="img/male-user.png">
+  </ion-avatar>
+
+ <ion-list>
+   
+        <ion-item>
+            <ion-label floating>Username</ion-label>
+            <ion-input type="text"  (input)="username = $event.target.value"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Password</ion-label>
+            <ion-input  (input)="password = $event.target.value" type="password"></ion-input>
+        </ion-item>
+
+    </ion-list>
+
+
+
+  <ion-nav #mycontent [root]="rootPage"></ion-nav>
+</ion-content>

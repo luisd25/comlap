@@ -1,5 +1,8 @@
 import {Component} from '@angular/core';
+import { App, ViewController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
+import {ProfilePage} from '../profile/profile';
 // import {bootstrap} from '@angular/platform-browser-dynamic';
 //To do : limit imports
 import 'rxjs/Rx'
@@ -8,6 +11,7 @@ import {BackandService} from '../../providers/backandService'
 @Component({
     templateUrl: 'login.html',
     selector: 'page-login',
+    // entryComponents:[ ProfilePage ]
 })
 export class LoginPage {
 
@@ -22,13 +26,17 @@ export class LoginPage {
     oldPassword: string = '';
     newPassword: string = '';
     confirmNewPassword: string = '';
+    profilePage = ProfilePage;
 
 
-    constructor(public backandService:BackandService,public alertCtrl: AlertController) {
+
+    constructor(public backandService:BackandService,public alertCtrl: AlertController,public navCtrl: NavController, public viewCtrl: ViewController,public appCtrl: App) {
 
         this.auth_type = backandService.getAuthType();
         this.auth_status = backandService.getAuthStatus();
         this.loggedInUser = backandService.getUsername();
+        // this.viewCtrl = this.ViewController();
+
     }
 
 
@@ -73,10 +81,14 @@ export class LoginPage {
         let failed = 0;
         for (let i = 0; i < this.items.length; i++) {
           if(this.items[i].username == this.username &&
-             this.items[i].password == this.password) failed = 1;
+             this.items[i].password == this.password) failed = i;
         }
-        if (failed==1) {
+        if (failed != 0) {
             this.showAlert('Success :D','The connection to the azure database has been successfull.');
+            // this.navCtrl.setRoot(this.profilePage)
+            this.viewCtrl.dismiss();
+            this.appCtrl.getRootNav().push(this.profilePage,{user: this.items[failed]});
+            // this.navCtrl.pop();
         }
         else{this.showAlert('Failed :O','The connection to the azure database hasnt success.');}
   }

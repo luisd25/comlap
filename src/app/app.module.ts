@@ -5,6 +5,7 @@ import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { ProfilePage } from '../pages/profile/profile';
 import { BackandService } from '../providers/backandService';
 
 @NgModule({
@@ -13,7 +14,8 @@ import { BackandService } from '../providers/backandService';
     LoginPage,
     SignupPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    ProfilePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -24,7 +26,8 @@ import { BackandService } from '../providers/backandService';
     LoginPage,
     SignupPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    ProfilePage
   ],
   providers: [BackandService]
 })

@@ -1,16 +1,20 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild  } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 
 import { TabsPage } from '../pages/tabs/tabs';
-
+import { ProfilePage } from '../pages/profile/profile';
+import { NavController } from 'ionic-angular';
 import {BackandService} from '../providers/backandService'
 
 @Component({
-  template: `<ion-nav [root]="rootPage"></ion-nav>`
+  template: `<ion-nav #myNav [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
-  rootPage = TabsPage;
+
+  @ViewChild('myNav') nav: NavController
+rootPage: any  = ProfilePage;
+  // rootPage: any  = TabsPage;
 
   constructor(platform: Platform, private backandService:BackandService) {
     platform.ready().then(() => {
@@ -24,5 +28,6 @@ export class MyApp {
       backandService.signin('luis@123', '1234567');
     });
   }
+
 
 }

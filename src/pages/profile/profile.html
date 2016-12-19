@@ -28,8 +28,8 @@
         
         <button ion-item class='username' disabled >{{this.userName}}</button>
         <button ion-item>Profile</button>
-        <button ion-item>New Appointment</button>
-        <button ion-item>List Of Apointment</button>
+        <button ion-item (click)="newAppointment()"> New Appointment</button>
+        <button ion-item (click)="listOfAppointment()">List Of Apointment</button>
         <button ion-item>Log Out</button>
 
       </ion-list>

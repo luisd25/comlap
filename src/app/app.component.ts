@@ -4,6 +4,9 @@ import { StatusBar } from 'ionic-native';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { ProfilePage } from '../pages/profile/profile';
+import {NewAppointmentPage} from '../new-appointment/new-appointment';
+import {ListOfAppointmentPage} from '../list-of-appointment/list-of-appointment';
+
 import { NavController } from 'ionic-angular';
 import {BackandService} from '../providers/backandService'
 
@@ -13,8 +16,8 @@ import {BackandService} from '../providers/backandService'
 export class MyApp {
 
   @ViewChild('myNav') nav: NavController
-rootPage: any  = ProfilePage;
-  // rootPage: any  = TabsPage;
+// rootPage: any  = ProfilePage;
+  rootPage: any  = TabsPage;
 
   constructor(platform: Platform, private backandService:BackandService) {
     platform.ready().then(() => {

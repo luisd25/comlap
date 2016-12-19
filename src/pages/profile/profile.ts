@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+import {NewAppointmentPage} from '../new-appointment/new-appointment';
+import {ListOfAppointmentPage} from '../list-of-appointment/list-of-appointment';
 
 /*
   Generated class for the Profile page.
@@ -13,10 +15,12 @@ import { AlertController } from 'ionic-angular';
   templateUrl: 'profile.html'
 })
 export class ProfilePage {
-  public currentUser:any[] = [];
+  public currentUser:any;
   public userName:string = '';
   public name:string = '';
   public lastName:string = '';
+  newappointment = NewAppointmentPage;
+  listappointment= ListOfAppointmentPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController) {}
 
@@ -25,6 +29,9 @@ export class ProfilePage {
 
       this.currentUser = this.navParams.get('user');
       // this.showAlert(this.items[0].username,'');
+      this.userName = this.currentUser.username;
+      this.name = this.currentUser.name;
+      this.lastName = this.currentUser.lastName;
 
     }
     else{
@@ -36,7 +43,16 @@ export class ProfilePage {
   
   ngOnInit() {
         this.currentUserDetail();
-        // this.username = 'Luis Dominguez';
+       
+        
+    }
+    newAppointment(){
+      this.navCtrl.push(this.newappointment);
+
+    }
+    listOfAppointment(){
+      this.navCtrl.push(this.listappointment);
+
     }
 
   showAlert(titlep:string,subTitlep:string) {

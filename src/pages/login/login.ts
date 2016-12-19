@@ -75,15 +75,19 @@ export class LoginPage {
   }
   validateUser(){
         let failed = 0;
+        let position = 0;
         for (let i = 0; i < this.items.length; i++) {
           if(this.items[i].username == this.username &&
-             this.items[i].password == this.password) failed = i;
+             this.items[i].password == this.password) {
+                 failed = 1; 
+                 position = i;
+                }
         }
         if (failed != 0) {
             this.showAlert('Success :D','The connection to the azure database has been successfull.');
             // this.navCtrl.setRoot(this.profilePage)
             this.viewCtrl.dismiss();
-            this.appCtrl.getRootNav().push(this.profilePage,{user: this.items[failed]});
+            this.appCtrl.getRootNav().push(this.profilePage,{user: this.items[position]});
             // this.navCtrl.pop();
         }
         else{this.showAlert('Failed :O','The connection to the azure database hasnt success.');}

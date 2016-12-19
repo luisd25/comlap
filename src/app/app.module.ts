@@ -7,6 +7,8 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ProfilePage } from '../pages/profile/profile';
 import { BackandService } from '../providers/backandService';
+import {NewAppointmentPage} from '../pages/new-appointment/new-appointment';
+import {ListOfAppointmentPage} from '../pages/list-of-appointment/list-of-appointment';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { BackandService } from '../providers/backandService';
     SignupPage,
     HomePage,
     TabsPage,
-    ProfilePage
+    ProfilePage,
+    NewAppointmentPage,
+    ListOfAppointmentPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -27,7 +31,9 @@ import { BackandService } from '../providers/backandService';
     SignupPage,
     HomePage,
     TabsPage,
-    ProfilePage
+    ProfilePage,
+    NewAppointmentPage,
+    ListOfAppointmentPage
   ],
   providers: [BackandService]
 })

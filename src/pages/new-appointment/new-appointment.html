@@ -18,12 +18,14 @@
 
 <ion-list>
   <ion-item>
-    <ion-input type="text" placeholder="Descripción"></ion-input>
-  </ion-item>
+    <ion-label floating>Description</ion-label>
+    <ion-textarea (input)="description = $event.target.value"></ion-textarea>
+ </ion-item>
+
 
   <ion-item>
     <ion-label>Area</ion-label>
-    <ion-select [(ngModel)]="area">
+    <ion-select [(ngModel)]="specialty" (input)="specialty = $event.target.value">
       <ion-option value="Orthodontics">Orthodontics</ion-option>
       <ion-option value="General practice">General practice</ion-option>
       <ion-option value="Paediatric">Paediatric</ion-option>
@@ -34,10 +36,11 @@
   </ion-item>
   <ion-item>
     <ion-label>Start Time</ion-label>
-    <ion-datetime displayFormat="MM/DD/YYYY HH" pickerFormat="MMM DD YYYY HH"></ion-datetime>
+    <ion-datetime displayFormat="MM/DD/YYYY HH" pickerFormat="MMM DD YYYY HH" [(ngModel)]="myDate">>
+    </ion-datetime>
   </ion-item>
 
-  <button ion-button full>Send Appointment</button>
+  <button ion-button full (click)="sendAppointment()">Send Appointment</button>
 </ion-list>
 
 </ion-content>

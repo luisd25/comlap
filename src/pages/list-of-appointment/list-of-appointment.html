@@ -14,5 +14,10 @@
 
 
 <ion-content padding>
-  <h1>TODO: show list of appointment</h1>
+  <h1>TODO: Detail of list of appointment</h1>
+  <ion-list>
+    <ion-item *ngFor="let item of items">
+      <button ion-item (click)="showAppointment()">{{item.specialty}}</button>
+    </ion-item>
+  </ion-list>
 </ion-content>

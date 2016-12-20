@@ -1,19 +1,20 @@
 
 <ion-header class="header">
-<ion-navbar>
-    <button ion-button menuToggle icon-only>
-      <ion-icon name='menu'></ion-icon>
-    </button>
+<ion-navbar hideBackButton>
     <ion-title>
       Profile
     </ion-title>
-  </ion-navbar>
+  <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+  </button>
+</ion-navbar>
+  
 </ion-header>
 
 <ion-content padding>
 
   <!--Menu-->
-  <ion-menu [content]="mycontent">
+  <ion-menu [content]="mycontent" persistent >
     <ion-header>
    <ion-toolbar>
      <ion-title>Pages</ion-title>
@@ -53,7 +54,7 @@
         </ion-item>
         <ion-item>
             <ion-label floating>LastName</ion-label>
-            <ion-input type="text" value={{this.lastName}} (input)="username = $event.target.value" disabled></ion-input>
+            <ion-input type="text" value={{this.Lastname}} (input)="username = $event.target.value" disabled></ion-input>
         </ion-item>
 
         <!--<ion-item>

@@ -14,11 +14,12 @@ import {ListOfAppointmentPage} from '../list-of-appointment/list-of-appointment'
   selector: 'page-profile',
   templateUrl: 'profile.html'
 })
+
 export class ProfilePage {
   public currentUser:any;
   public userName:string = '';
   public name:string = '';
-  public lastName:string = '';
+  public Lastname:string = '';
   newappointment = NewAppointmentPage;
   listappointment= ListOfAppointmentPage;
 
@@ -28,31 +29,29 @@ export class ProfilePage {
     if(this.navParams.get('user')){
 
       this.currentUser = this.navParams.get('user');
-      // this.showAlert(this.items[0].username,'');
+      
       this.userName = this.currentUser.username;
       this.name = this.currentUser.name;
-      this.lastName = this.currentUser.lastName;
-
+      this.Lastname = this.currentUser.Lastname;
     }
     else{
       this.userName = 'Luisd25';
       this.name = 'Luis';
-      this.lastName = 'Dominguez';
+      this.Lastname = 'Dominguez';
     }
   }
   
-  ngOnInit() {
-        this.currentUserDetail();
-       
-        
+    ngOnInit() {
+        this.currentUserDetail();    
     }
     newAppointment(){
-      this.navCtrl.push(this.newappointment);
+      this.navCtrl.push(this.newappointment,{userid:this.currentUser.userid});
+      // this.navCtrl.push(this.newappointment,{userid:'65'});
 
     }
     listOfAppointment(){
-      this.navCtrl.push(this.listappointment);
-
+      this.navCtrl.push(this.listappointment,{userid:this.currentUser.userid});
+      // this.navCtrl.push(this.listappointment,{userid:'65'});
     }
 
   showAlert(titlep:string,subTitlep:string) {

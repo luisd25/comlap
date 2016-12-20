@@ -4,7 +4,6 @@ import {BackandService} from '../../providers/backandService'
 import {Http, Response} from '@angular/http';
 import { Headers, RequestOptions } from '@angular/http';
 import {Observable} from 'rxjs/Rx';
-import { URLSearchParams } from "@angular/http"
 import { AlertController } from 'ionic-angular';
 
 @Component({

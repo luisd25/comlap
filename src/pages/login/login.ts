@@ -84,7 +84,7 @@ export class LoginPage {
                 }
         }
         if (failed != 0) {
-            this.showAlert('Success :D','The connection to the azure database has been successfull.');
+            // this.showAlert('Success :D','The connection to the azure database has been successfull.');
             // this.navCtrl.setRoot(this.profilePage)
             this.viewCtrl.dismiss();
             this.appCtrl.getRootNav().push(this.profilePage,{user: this.items[position]});

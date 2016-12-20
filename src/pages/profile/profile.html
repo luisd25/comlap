@@ -1,0 +1,70 @@
+
+<ion-header class="header">
+<ion-navbar hideBackButton>
+    <ion-title>
+      Profile
+    </ion-title>
+  <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+  </button>
+</ion-navbar>
+  
+</ion-header>
+
+<ion-content padding>
+
+  <!--Menu-->
+  <ion-menu [content]="mycontent" persistent >
+    <ion-header>
+   <ion-toolbar>
+     <ion-title>Pages</ion-title>
+   </ion-toolbar>
+ </ion-header>
+    <ion-content>
+      <ion-avatar>
+        <img class='profile' src="img/male-user.png">
+      </ion-avatar>
+
+      <ion-list>
+        
+        <button ion-item class='username' disabled >{{this.userName}}</button>
+        <button ion-item>Profile</button>
+        <button ion-item (click)="newAppointment()"> New Appointment</button>
+        <button ion-item (click)="listOfAppointment()">List Of Apointment</button>
+        <button ion-item>Log Out</button>
+
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-nav #mycontent [root]="rootPage"></ion-nav>
+  <!--Page-->
+    
+    <ion-avatar class="profile_image">
+      <img class='profile' src="img/male-user.png">
+    </ion-avatar>
+ <ion-list>
+   
+        <ion-item>
+            <ion-label floating>User Name</ion-label>
+            <ion-input type="text" value={{this.userName}} (input)="username = $event.target.value" disabled></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Name</ion-label>
+            <ion-input type="text" value={{this.name}} (input)="username = $event.target.value" disabled></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>LastName</ion-label>
+            <ion-input type="text" value={{this.Lastname}} (input)="username = $event.target.value" disabled></ion-input>
+        </ion-item>
+
+        <!--<ion-item>
+            <ion-label floating>Password</ion-label>
+            <ion-input  (input)="password = $event.target.value" type="password"></ion-input>
+        </ion-item>-->
+
+    </ion-list>
+
+
+
+  
+</ion-content>

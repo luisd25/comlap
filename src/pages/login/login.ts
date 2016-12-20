@@ -1,5 +1,8 @@
 import {Component} from '@angular/core';
+import { App, ViewController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
+import {ProfilePage} from '../profile/profile';
 // import {bootstrap} from '@angular/platform-browser-dynamic';
 //To do : limit imports
 import 'rxjs/Rx'
@@ -8,6 +11,7 @@ import {BackandService} from '../../providers/backandService'
 @Component({
     templateUrl: 'login.html',
     selector: 'page-login',
+    // entryComponents:[ ProfilePage ]
 })
 export class LoginPage {
 
@@ -18,17 +22,17 @@ export class LoginPage {
     auth_status:string = null;
     loggedInUser: string = '';
     public items:any[] = [];
-
-    oldPassword: string = '';
-    newPassword: string = '';
-    confirmNewPassword: string = '';
+    profilePage = ProfilePage;
 
 
-    constructor(public backandService:BackandService,public alertCtrl: AlertController) {
+
+    constructor(public backandService:BackandService,public alertCtrl: AlertController,public navCtrl: NavController, public viewCtrl: ViewController,public appCtrl: App) {
 
         this.auth_type = backandService.getAuthType();
         this.auth_status = backandService.getAuthStatus();
         this.loggedInUser = backandService.getUsername();
+        // this.viewCtrl = this.ViewController();
+
     }
 
 
@@ -38,7 +42,7 @@ export class LoginPage {
             {
               fieldName: 'username',
               operator: 'contains',
-              value: 'luisd25'
+              value: this.username
             }
           ]
       ;
@@ -50,21 +54,9 @@ export class LoginPage {
                    this.items = data;
                },
                err => this.backandService.logError(err),
-               () => console.log('OK')
+               ()=> this.validateUser()
            );
-        // if(this.items[1].username == 'luisd26')alert('connect success');
-        // else{
-        //   alert('connect failed');
-        // }
-        let failed = 0;
-        for (let i = 0; i < this.items.length; i++) {
-          if(this.items[i].username == this.username &&
-             this.items[i].password == this.password) failed = 1;
-        }
-        if (failed==1) {
-            this.showAlert('Success :D','The connection to the azure database has been successfull.');
-        }
-        else{this.showAlert('Failed :O','The connection to the azure database hasnt success.');}
+
   }
 
 
@@ -80,6 +72,25 @@ export class LoginPage {
       buttons: ['OK']
     });
     alert.present();
+  }
+  validateUser(){
+        let failed = 0;
+        let position = 0;
+        for (let i = 0; i < this.items.length; i++) {
+          if(this.items[i].username == this.username &&
+             this.items[i].password == this.password) {
+                 failed = 1; 
+                 position = i;
+                }
+        }
+        if (failed != 0) {
+            // this.showAlert('Success :D','The connection to the azure database has been successfull.');
+            // this.navCtrl.setRoot(this.profilePage)
+            this.viewCtrl.dismiss();
+            this.appCtrl.getRootNav().push(this.profilePage,{user: this.items[position]});
+            // this.navCtrl.pop();
+        }
+        else{this.showAlert('Failed :O','The connection to the azure database hasnt success.');}
   }
 
 

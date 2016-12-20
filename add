@@ -1,0 +1,52 @@
+[1mdiff --git a/www/index.html b/www/index.html[m
+[1mdeleted file mode 100644[m
+[1mindex 9d0f2b1..0000000[m
+[1m--- a/www/index.html[m
+[1m+++ /dev/null[m
+[36m@@ -1,46 +0,0 @@[m
+[31m-<!DOCTYPE html>[m
+[31m-<html lang="en" dir="ltr">[m
+[31m-<head>[m
+[31m-  <meta charset="UTF-8">[m
+[31m-  <title>Ionic App</title>[m
+[31m-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">[m
+[31m-  <meta name="format-detection" content="telephone=no">[m
+[31m-  <meta name="msapplication-tap-highlight" content="no">[m
+[31m-[m
+[31m-  <link rel="icon" type="image/x-icon" href="assets/icon/favicon.ico">[m
+[31m-  <link rel="manifest" href="manifest.json">[m
+[31m-  <meta name="theme-color" content="#4e8ef7">[m
+[31m-  [m
+[31m-  <!-- cordova.js required for cordova apps -->[m
+[31m-  <script src="cordova.js"></script>[m
+[31m-[m
+[31m-  <!-- un-comment this code to enable service worker[m
+[31m-  <script>[m
+[31m-    if ('serviceWorker' in navigator) {[m
+[31m-      navigator.serviceWorker.register('service-worker.js')[m
+[31m-        .then(() => console.log('service worker installed'))[m
+[31m-        .catch(err => console.log('Error', err));[m
+[31m-    }[m
+[31m-  </script>-->[m
+[31m-[m
+[31m-  <link href="build/main.css" rel="stylesheet">[m
+[31m-[m
+[31m-</head>[m
+[31m-<body>[m
+[31m-[m
+[31m-  <!-- Ionic's root component and where the app will load -->[m
+[31m-  <ion-app></ion-app>[m
+[31m-[m
+[31m-  <!-- The polyfills js is generated during the build process -->[m
+[31m-  <script src="build/polyfills.js"></script>[m
+[31m-[m
+[31m-  <!-- The bundle js is generated during the build process -->[m
+[31m-  <script src="build/main.js"></script>[m
+[31m-[m
+[31m-</body>[m
+[31m-</html>[m
+[31m-<style>[m
+[31m-  .header{[m
+[31m-    margin-top: 0;[m
+[31m-  }[m
+[31m-</style>[m

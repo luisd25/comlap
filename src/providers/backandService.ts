@@ -45,7 +45,7 @@ import * as io from 'socket.io-client';
 @Injectable()
 export class BackandService {
 
-    private api_url: string = 'https://api.backand.com';
+    public api_url: string = 'https://api.backand.com';
     private socialProviders: any = {
         github: {name: 'github', label: 'Github', url: 'www.github.com', css: 'github', id: 1},
         google: {name: 'google', label: 'Google', url: 'www.google.com', css: 'google-plus', id: 2},
@@ -454,12 +454,16 @@ export class BackandService {
         if (deep){
             query += query ? '&deep = true' : 'deep=true';
         }
+        // alert(object);
+        // alert(query);
+        //alert(returnObject);
 
 
         return this.http.post(this.api_url + '/1/objects/' + object + (query ? '?' + query : ''), data,
             {
                 headers: this.authHeader
             })
+
             .retry(3)
             .map(res => res.json());
     }
@@ -752,7 +756,7 @@ export class BackandService {
         return res.json().access_token;
     }
 
-    private get authHeader() {
+    public get authHeader() {
         var authHeader = new Headers();
         if (this.auth_token && this.auth_token.header_name && this.auth_token.header_value){
             authHeader.append(this.auth_token.header_name, this.auth_token.header_value);

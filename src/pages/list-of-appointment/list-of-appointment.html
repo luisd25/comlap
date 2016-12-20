@@ -1,0 +1,23 @@
+<!--
+  Generated template for the ListOfAppointment page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>List Of Appointment</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <h1>TODO: Detail of list of appointment</h1>
+  <ion-list>
+    <ion-item *ngFor="let item of items">
+      <button ion-item (click)="showAppointment()">{{item.specialty}}</button>
+    </ion-item>
+  </ion-list>
+</ion-content>

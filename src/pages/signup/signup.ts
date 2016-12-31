@@ -5,15 +5,15 @@ import {Http, Response} from '@angular/http';
 import { Headers, RequestOptions } from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import { AlertController } from 'ionic-angular';
+import { NavController, Nav , Tabs } from 'ionic-angular';
+import { LoginPage } from '../login/login';
 
 @Component({
   templateUrl: 'signup.html',
   selector: 'page-signup',
 })
 export class SignupPage {
-
-  firstName:string = '';
-  lastName:string = '';
+  tab:Tabs;
   userName: string = '';
   email:string = '';
   signUpPassword: string = '';
@@ -21,8 +21,10 @@ export class SignupPage {
   public items:any[] = [];
 
 
-  constructor(private backandService:BackandService,public alertCtrl: AlertController) {
-
+  constructor(public navCtrl: NavController, private nav: Nav, private backandService:BackandService
+              ,public alertCtrl: AlertController) 
+              {
+                this.tab = this.navCtrl.parent;
 
   }
 
@@ -31,14 +33,7 @@ export class SignupPage {
         this.showAlert('Password incorrect','');
         return;
       }
-      else if(!this.firstName || this.firstName.trim()==''){
-        this.showAlert('Blancks Fields','Please Fill the Blancks Fields');
-        return;
-      }
-      else if(!this.lastName || this.lastName.trim()==''){
-        this.showAlert('Blancks Fields','Please Fill the Blancks Fields');
-        return;
-      }
+      
       else if(!this.userName || this.userName.trim()==''){
         this.showAlert('Blancks Fields','Please Fill the Blancks Fields');
         return;
@@ -56,49 +51,21 @@ export class SignupPage {
         return;
       }
 
-       this.backandService.create('user', { name: this.firstName,lastname:this.lastName
-                                            ,username: this.userName, email:this.email
-                                            ,password: this.signUpPassword}).subscribe(
+       this.backandService.create('users', {username: this.userName, email:this.email
+                                            ,password: this.signUpPassword,usertype:'Patient'}).subscribe(
 
                data => {
-                  // alert('connected');
                   this.showAlert('Success :D','You can now loggin.');
-
-                   this.items.unshift({ id: null, username: this.userName, password: this.signUpPassword });
-
-                    console.log(this.items);
-                   this.firstName = '';
-                   this.lastName = '';
-                   this.userName = '';
-                   this.email = '';
-                   this.signUpPassword = '';
-
                },
 
                err => this.backandService.logError(err),
 
-               () => console.log('OK')
+               () => this.tab.select(1)
 
            );
 
    }
 
-    public signUp() {
-    if (this.signUpPassword != this.confirmPassword){
-      alert('Passwords should match');
-      return;
-    }
-    var $obs = this.backandService.signup(this.email, this.signUpPassword, this.confirmPassword, this.firstName, this.lastName);
-    $obs.subscribe(
-      data => {
-          alert('Sign up succeeded');
-          this.email = this.signUpPassword = this.confirmPassword = this.firstName = this.lastName = '';
-      },
-      err => {
-          this.backandService.logError(err)
-      },
-      () => console.log('Finish Auth'));
-  }
 
   public socialSignin(provider) {
     var $obs = this.backandService.socialSignin(provider);

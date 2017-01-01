@@ -68,7 +68,7 @@ export class ProfilePage {
       this.email = this.currentUser.email;
   }
     newAppointment(){
-      this.navCtrl.push(this.newappointment,{userid:this.currentUser.userid});
+      this.navCtrl.push(this.newappointment,{userid:this.currentUser.patientid});
       // this.navCtrl.push(this.newappointment,{userid:'65'});
 
     }

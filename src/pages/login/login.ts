@@ -47,7 +47,7 @@ export class LoginPage {
           ]
       ;
 
-      this.backandService.getList('user',null,null,filter)
+      this.backandService.getList('users',null,null,filter)
            .subscribe(
                data => {
                    console.log(data);

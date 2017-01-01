@@ -8,7 +8,6 @@
       <ion-icon name='menu'></ion-icon>
   </button>
 </ion-navbar>
-  
 </ion-header>
 
 <ion-content padding>
@@ -43,19 +42,36 @@
       <img class='profile' src="img/male-user.png">
     </ion-avatar>
  <ion-list>
-   
+       
+
+       <div align="center">  
+          <button ion-button icon-only (click)="enabledEdit()" >
+              <ion-icon name='create'></ion-icon>
+          </button>
+       </div>
+
         <ion-item>
             <ion-label floating>User Name</ion-label>
-            <ion-input type="text" value={{this.userName}} (input)="username = $event.target.value" disabled></ion-input>
+            <ion-input type="text" value={{this.userName}} (input)="username = $event.target.value" [disabled]="!this.enablefields"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label floating>Name</ion-label>
-            <ion-input type="text" value={{this.name}} (input)="username = $event.target.value" disabled></ion-input>
+            <ion-input type="text" value={{this.name}} (input)="name = $event.target.value" [disabled]="!this.enablefields"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label floating>LastName</ion-label>
-            <ion-input type="text" value={{this.Lastname}} (input)="username = $event.target.value" disabled></ion-input>
+            <ion-input type="text" value={{this.Lastname}} (input)="Lastname = $event.target.value" [disabled]="!this.enablefields"></ion-input>
         </ion-item>
+        <ion-item>
+            <ion-label floating>Email</ion-label>
+            <ion-input type="text" value={{this.email}} (input)="email = $event.target.value" [disabled]="!this.enablefields"></ion-input>
+        </ion-item>
+
+        <button ion-button icon-left full (click)="update()" color="success" [disabled]="!this.enablefields">
+           <ion-icon name="refresh"></ion-icon> Update   
+        </button>
+        
+        
 
         <!--<ion-item>
             <ion-label floating>Password</ion-label>

@@ -471,7 +471,7 @@ export class BackandService {
     public update(object: string, id: string, item: any, deep: boolean = false, returnObject: boolean = false) {
         let data: string = JSON.stringify(item);
         let query: string = '';
-        if (returnObject){
+        if (!returnObject){
             query += 'returnObject=true';
         }
         if (deep){
@@ -486,6 +486,18 @@ export class BackandService {
             .retry(3)
             .map(res => res.json());
     }
+
+    // public update2(object: string, id: string, item: any) {
+    //     console.log(this.authHeader);
+    //     let data: string = JSON.stringify(item);
+    //     console.log(data);
+    //     return this.http.put('https://api.backand.com:443/1/objects/patient/3', data,
+    //         {
+    //             headers: this.authHeader
+    //         })
+    //         .retry(3)
+    //         .map(res => res.json());
+    // }
 
 
 

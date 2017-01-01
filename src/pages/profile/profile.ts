@@ -24,9 +24,11 @@ export class ProfilePage {
   public Lastname:string = '';
   public email:string = '';
   public usertype:string = '';
+  public updateobject:string = '';
   public enablefields:boolean = false;
   newappointment = NewAppointmentPage;
   listappointment= ListOfAppointmentPage;
+  paciente = patient;
 
   constructor(public backandService:BackandService,public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController) {}
 
@@ -59,6 +61,7 @@ export class ProfilePage {
     }
 
     public currentUserDetail(){
+      
       this.userName = this.currentUser.username;
       this.name = this.currentUser.firstname;
       this.Lastname = this.currentUser.lastname;
@@ -77,6 +80,63 @@ export class ProfilePage {
       this.enablefields = !this.enablefields;
       // return this.enablefields;
     }
+    update(){
+       
+      this.currentUser.username = this.userName;
+      this.currentUser.firstname=this.name ;
+      this.currentUser.lastname = this.Lastname;
+      this.currentUser.email = this.email;
+
+
+       let updateobject = {	
+        fileid: this.currentUser.fileid,
+        sufferid: this.currentUser.sufferid,
+        userid: this.currentUser.userid,
+        patientid: this.currentUser.patientid,
+        identification: this.currentUser.identification,
+        ssn: this.currentUser.ssn,
+        firstname: this.currentUser.firstname,
+        secondname: this.currentUser.secondname,
+        lastname: this.currentUser.lastname,
+        secondlastname: this.currentUser.secondlastname,
+        gender: this.currentUser.gender,
+        birthdate: this.currentUser.birthdate,
+        pweight: this.currentUser.pweight,
+        pheight: this.currentUser.pheight,
+        telephone: this.currentUser.telephone,
+        celphone: this.currentUser.celphone,
+        homephone: this.currentUser.homephone,
+        email: this.currentUser.email,
+        details: this.currentUser.details,
+        appointment: this.currentUser.appointment,
+        username: this.currentUser.username
+    }
+      // this.showAlert('',this.updateobject);
+      // this.backandService.update('patient',this.currentUser.patientid,updateobject)
+      //      .subscribe(
+      //          data => {
+      //              console.log(data);
+      //             //  this.currentUser = data[0];
+      //          },
+      //          err => this.backandService.logError(err),
+      //          ()=> this.showAlert('updated','')
+      //      );
+
+      this.backandService.update('patient', '3',updateobject)
+        .subscribe(
+                data => {
+                  console.log(data);
+                },
+                err => this.backandService.logError(err),
+                () => this.successonUpdate()
+            );
+    }
+
+    successonUpdate(){
+      this.showAlert('Updated','Datos Actualizados');
+      this.enablefields = !this.enablefields;
+
+    }
 
   showAlert(titlep:string,subTitlep:string) {
     let alert = this.alertCtrl.create({
@@ -86,5 +146,32 @@ export class ProfilePage {
     });
     alert.present();
   }
+
+}
+
+ class patient{
+
+  
+  public	fileid: "";
+	public	sufferid: "";
+	public	userid: "7";
+	public	patientid: 3;
+	public	identification: "";
+	public	ssn: "";
+	public	firstname: "luis";
+	public	secondname: "";
+	public	lastname: "";
+	public	secondlastname: "";
+	public	gender: "";
+	public	birthdate: null;
+	public	pweight: "";
+	public	pheight: "";
+	public	telephone: "";
+	public	celphone: "";
+	public	homephone: "";
+	public	email: "123";
+	public	details: "";
+	public	appointment: null;
+	public	username: "jose";
 
 }

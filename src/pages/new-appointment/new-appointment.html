@@ -18,6 +18,10 @@
 
 
 <ion-list>
+    <ion-item>
+      <ion-label floating>Titulo</ion-label>
+      <ion-input type="text" (input)="apttitle = $event.target.value"></ion-input>
+  </ion-item>
   <ion-item>
     <ion-label floating>Description</ion-label>
     <ion-textarea (input)="description = $event.target.value"></ion-textarea>

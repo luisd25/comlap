@@ -16,27 +16,25 @@ import { AlertController } from 'ionic-angular';
   templateUrl: 'new-appointment.html'
 })
 export class NewAppointmentPage {
+  apttitle:string = '';
   description:string = '';
   specialty:string = '';
   myDate:string = '';
-  userid:number;
+  patientid:number;
+  caseid:number;
   public items:any[] = [];
   constructor(public navCtrl: NavController, public navParams: NavParams,private backandService:BackandService
               ,public alertCtrl: AlertController) {}
 
   sendAppointment(){
     // this.showAlert('',this.myDate);
-    this.backandService.create('appointments', { description: this.description,specialty:this.specialty
-                                            ,date: this.myDate,userid:this.userid}).subscribe(
+    this.backandService.create('appointment', {apttitle:this.apttitle, aptdetail: this.description,specialty:this.specialty
+                                            ,aptstartdate: this.myDate,patientid:this.patientid,caseid:this.caseid}).subscribe(
 
                data => {
                   // alert('connected');
                   // this.showAlert('Success :D','The appointment was send');
-
-                   this.items.unshift({id:null, description: this.description,specialty:this.specialty
-                                            ,date: this.myDate,userid:this.userid });
-
-                    console.log(this.items);
+                    console.log(data);
                    
 
                },
@@ -50,8 +48,10 @@ export class NewAppointmentPage {
   }
 
   public currentUserId(){
-    if(this.navParams.get('userid')){
-      this.userid = this.navParams.get('userid');
+    if(this.navParams.get('patientid')){
+      this.patientid = this.navParams.get('patientid');
+      this.caseid = this.navParams.get('caseid');
+      console.log('id en add appointment',this.patientid,this.caseid);
     }
     else{
     }

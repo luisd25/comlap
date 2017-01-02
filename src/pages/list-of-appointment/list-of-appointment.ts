@@ -4,6 +4,7 @@ import {BackandService} from '../../providers/backandService'
 import {Http, Response} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import { AlertController } from 'ionic-angular';
+import {NewAppointmentPage} from '../new-appointment/new-appointment';
 
 
 /*
@@ -28,6 +29,7 @@ export class ListOfAppointmentPage {
   hospitalid:number;
   public currentcases:any;
   public items:any[] = [];
+  newAppointment = NewAppointmentPage;
   
   constructor(public navCtrl: NavController, public navParams: NavParams,private backandService:BackandService
               ,public alertCtrl: AlertController) {
@@ -80,7 +82,9 @@ export class ListOfAppointmentPage {
     });
     alert.present();
   }
-  showAppointment(){
+  addAppointment(){
+
+      this.navCtrl.push(this.newAppointment,{patientid:this.currentcases.patientid,caseid:this.currentcases.caseid});
     
   }
 

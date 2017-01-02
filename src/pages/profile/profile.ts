@@ -3,6 +3,8 @@ import { NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import {NewAppointmentPage} from '../new-appointment/new-appointment';
 import {ListOfAppointmentPage} from '../list-of-appointment/list-of-appointment';
+import { HospitalPage } from '../hospital/hospital';
+
 import {BackandService} from '../../providers/backandService'
 
 
@@ -28,37 +30,38 @@ export class ProfilePage {
   public enablefields:boolean = false;
   newappointment = NewAppointmentPage;
   listappointment= ListOfAppointmentPage;
-  paciente = patient;
+  hospitalTabs= HospitalPage;
 
-  constructor(public backandService:BackandService,public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController) {}
+  constructor(public backandService:BackandService,public navCtrl: NavController, public navParams: NavParams
+  ,public alertCtrl: AlertController) {}
 
   
   
-    ngOnInit() {
-      if(this.navParams.get('user')){
-        this.usertype = this.navParams.get('user').usertype;
-        let filter =
-          [
-            {
-              fieldName: 'userid',
-              operator: 'in',
-              value: this.navParams.get('user').userid
-            }
-          ]
-      ;
+    // ngOnInit() {
+    //   if(this.navParams.get('user')){
+    //     this.usertype = this.navParams.get('user').usertype;
+    //     let filter =
+    //       [
+    //         {
+    //           fieldName: 'userid',
+    //           operator: 'in',
+    //           value: this.navParams.get('user').userid
+    //         }
+    //       ]
+    //   ;
 
-      this.backandService.getList('patient',null,null,filter)
-           .subscribe(
-               data => {
-                   console.log(data);
-                   this.currentUser = data[0];
-               },
-               err => this.backandService.logError(err),
-               ()=> this.currentUserDetail()
-           );
+    //   this.backandService.getList('patient',null,null,filter)
+    //        .subscribe(
+    //            data => {
+    //                console.log(data);
+    //                this.currentUser = data[0];
+    //            },
+    //            err => this.backandService.logError(err),
+    //            ()=> this.currentUserDetail()
+    //        );
 
-      } 
-    }
+    //   } 
+    // }
 
     public currentUserDetail(){
       
@@ -74,6 +77,11 @@ export class ProfilePage {
     }
     listOfAppointment(){
       this.navCtrl.push(this.listappointment,{userid:this.currentUser.userid});
+      // this.navCtrl.push(this.listappointment,{userid:'65'});
+    }
+
+    mapview(){
+      this.navCtrl.push(this.hospitalTabs,{userid:this.currentUser.userid});
       // this.navCtrl.push(this.listappointment,{userid:'65'});
     }
     enabledEdit(){
@@ -133,45 +141,18 @@ export class ProfilePage {
     }
 
     successonUpdate(){
-      this.showAlert('Updated','Datos Actualizados');
+      // this.showAlert('Updated','Datos Actualizados');
       this.enablefields = !this.enablefields;
 
     }
 
-  showAlert(titlep:string,subTitlep:string) {
-    let alert = this.alertCtrl.create({
-      title: titlep,
-      subTitle: subTitlep,
-      buttons: ['OK']
-    });
-    alert.present();
-  }
-
-}
-
- class patient{
-
-  
-  public	fileid: "";
-	public	sufferid: "";
-	public	userid: "7";
-	public	patientid: 3;
-	public	identification: "";
-	public	ssn: "";
-	public	firstname: "luis";
-	public	secondname: "";
-	public	lastname: "";
-	public	secondlastname: "";
-	public	gender: "";
-	public	birthdate: null;
-	public	pweight: "";
-	public	pheight: "";
-	public	telephone: "";
-	public	celphone: "";
-	public	homephone: "";
-	public	email: "123";
-	public	details: "";
-	public	appointment: null;
-	public	username: "jose";
+  // showAlert(titlep:string,subTitlep:string) {
+  //   let alert = this.alertCtrl.create({
+  //     title: titlep,
+  //     subTitle: subTitlep,
+  //     buttons: ['OK']
+  //   });
+  //   alert.present();
+  // }
 
 }

@@ -26,13 +26,17 @@ export class MapPage {
             Promise.all([
                 mapLoaded,
                 locationsLoaded
+
             ]).then((result) => {
  
                 let locations = result[1];
- 
+                let int = 0;
                 for(let location of locations){
-                    this.maps.addMarker(location.latitude, location.longitude);
+                    int++;
+                    // console.log(location.latitude, location.longitude);
+                    this.maps.addMarker(location.latitude, location.longitude,location.NombreCentro);
                 }
+                console.log(int);
  
             });
  

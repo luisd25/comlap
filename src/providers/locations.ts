@@ -1,40 +1,88 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import {BackandService} from './backandService'
+import { Geolocation } from 'ionic-native';
  
 @Injectable()
 export class Locations {
  
-    data: any;
+    hospitalList: any;
  
-    constructor(public http: Http) {
+    constructor(public backandService:BackandService,public http: Http) {
  
     }
  
     load(){
  
-        if(this.data){
-            return Promise.resolve(this.data);
+        if(this.hospitalList){
+            return Promise.resolve(this.hospitalList);
         }
  
         return new Promise(resolve => {
+                    let filter =
+                [
+                    {
+                    fieldName: "Provincia",
+                    operator: "contains",
+                    value: "SANTO DOMINGO"
+                    }
+                ]
+            ;
+
+            this.backandService.getList('hospital',280,null,filter)
+           .subscribe(
+               data => {
+                   console.log(data);
+                   this.hospitalList = this.applyHaversine(data);
  
-            this.http.get('assets/data/locations.json').map(res => res.json()).subscribe(data => {
- 
-                this.data = this.applyHaversine(data.locations);
- 
-                this.data.sort((locationA, locationB) => {
+                this.hospitalList.sort((locationA, locationB) => {
                     return locationA.distance - locationB.distance;
                 });
  
-                resolve(this.data);
-            });
+                resolve(this.hospitalList);
+               },
+               err => this.backandService.logError(err),
+               ()=> console.log('loaded hospital')
+
+            
+           );
  
         });
  
     }
  
     applyHaversine(locations){
+
+        Geolocation.getCurrentPosition().then((position) => {
+ 
+        // UNCOMMENT FOR NORMAL USE
+        // let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+        let usersLocation = {
+            lat: position.coords.latitude, 
+            lng:  position.coords.longitude
+        };
+        console.log(position.coords.latitude, position.coords.longitude);
+        locations.map((location) => {
+ 
+            let placeLocation = {
+                lat: location.latitude,
+                lng: location.longitude
+            };
+ 
+            location.distance = this.getDistanceBetweenPoints(
+                usersLocation,
+                placeLocation,
+                'km'
+            ).toFixed(2);
+        });
+ 
+        return locations;
+
+        
+        
+        });
  
         let usersLocation = {
             lat: 40.713744, 
@@ -51,7 +99,7 @@ export class Locations {
             location.distance = this.getDistanceBetweenPoints(
                 usersLocation,
                 placeLocation,
-                'miles'
+                'km'
             ).toFixed(2);
         });
  

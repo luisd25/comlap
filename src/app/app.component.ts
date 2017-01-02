@@ -17,8 +17,8 @@ import { HospitalPage } from '../pages/hospital/hospital';
 export class MyApp {
 
   @ViewChild('myNav') nav: NavController
-// rootPage: any  = ProfilePage;
-  rootPage: any  = HospitalPage;
+    rootPage: any  = TabsPage;
+  // rootPage: any  = HospitalPage;
 
   constructor(platform: Platform, private backandService:BackandService) {
     platform.ready().then(() => {

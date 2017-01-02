@@ -10,6 +10,7 @@ import { BackandService } from '../providers/backandService';
 import {NewAppointmentPage} from '../pages/new-appointment/new-appointment';
 import {ListOfAppointmentPage} from '../pages/list-of-appointment/list-of-appointment';
 import { CasesPage } from '../pages/cases/cases';
+import { AddcasePage } from '../pages/addcase/addcase'
 
 import { HospitalPage } from '../pages/hospital/hospital';
 import { MapPage } from '../pages/map/map';
@@ -31,7 +32,8 @@ import { Connectivity } from '../providers/connectivity';
     HospitalPage,
     MapPage,
     ListhospitalPage,
-    CasesPage
+    CasesPage,
+    AddcasePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -49,7 +51,8 @@ import { Connectivity } from '../providers/connectivity';
     HospitalPage,
     MapPage,
     ListhospitalPage,
-    CasesPage
+    CasesPage,
+    AddcasePage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},BackandService, Locations, GoogleMaps, Connectivity]
 })

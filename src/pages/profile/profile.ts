@@ -37,31 +37,31 @@ export class ProfilePage {
 
   
   
-    // ngOnInit() {
-    //   if(this.navParams.get('user')){
-    //     this.usertype = this.navParams.get('user').usertype;
-    //     let filter =
-    //       [
-    //         {
-    //           fieldName: 'userid',
-    //           operator: 'in',
-    //           value: this.navParams.get('user').userid
-    //         }
-    //       ]
-    //   ;
+    ngOnInit() {
+      if(this.navParams.get('user')){
+        this.usertype = this.navParams.get('user').usertype;
+        let filter =
+          [
+            {
+              fieldName: 'userid',
+              operator: 'in',
+              value: this.navParams.get('user').userid
+            }
+          ]
+      ;
 
-    //   this.backandService.getList('patient',null,null,filter)
-    //        .subscribe(
-    //            data => {
-    //                console.log(data);
-    //                this.currentUser = data[0];
-    //            },
-    //            err => this.backandService.logError(err),
-    //            ()=> this.currentUserDetail()
-    //        );
+      this.backandService.getList('patient',null,null,filter)
+           .subscribe(
+               data => {
+                   console.log(data);
+                   this.currentUser = data[0];
+               },
+               err => this.backandService.logError(err),
+               ()=> this.currentUserDetail()
+           );
 
-    //   } 
-    // }
+      } 
+    }
 
     public currentUserDetail(){
       
@@ -81,8 +81,9 @@ export class ProfilePage {
     }
 
     mapview(){
-      this.navCtrl.push(this.hospitalTabs,{userid:this.currentUser.userid});
+      this.navCtrl.push(this.hospitalTabs,{patientid:this.currentUser.patientid});
       // this.navCtrl.push(this.listappointment,{userid:'65'});
+      // console.log('envio mi usuario actual',this.currentUser.userid);
     }
     enabledEdit(){
       this.enablefields = !this.enablefields;
@@ -119,18 +120,9 @@ export class ProfilePage {
         appointment: this.currentUser.appointment,
         username: this.currentUser.username
     }
-      // this.showAlert('',this.updateobject);
-      // this.backandService.update('patient',this.currentUser.patientid,updateobject)
-      //      .subscribe(
-      //          data => {
-      //              console.log(data);
-      //             //  this.currentUser = data[0];
-      //          },
-      //          err => this.backandService.logError(err),
-      //          ()=> this.showAlert('updated','')
-      //      );
 
-      this.backandService.update('patient', '3',updateobject)
+
+      this.backandService.update('patient', this.currentUser.patientid,updateobject)
         .subscribe(
                 data => {
                   console.log(data);
@@ -141,18 +133,18 @@ export class ProfilePage {
     }
 
     successonUpdate(){
-      // this.showAlert('Updated','Datos Actualizados');
+      this.showAlert('Updated','Datos Actualizados');
       this.enablefields = !this.enablefields;
 
     }
 
-  // showAlert(titlep:string,subTitlep:string) {
-  //   let alert = this.alertCtrl.create({
-  //     title: titlep,
-  //     subTitle: subTitlep,
-  //     buttons: ['OK']
-  //   });
-  //   alert.present();
-  // }
+  showAlert(titlep:string,subTitlep:string) {
+    let alert = this.alertCtrl.create({
+      title: titlep,
+      subTitle: subTitlep,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
 
 }

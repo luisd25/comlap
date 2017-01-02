@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Locations } from '../../providers/locations';
+import { CasesPage } from '../cases/cases'
 
 /*
   Generated class for the Listhospital page.
@@ -14,10 +15,21 @@ import { Locations } from '../../providers/locations';
 })
 export class ListhospitalPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public locations: Locations) {}
+  public patientid:number;
+  newCases = CasesPage;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ListhospitalPage');
+  constructor(public navCtrl: NavController, public navParams: NavParams, public locations: Locations) {
+    // console.log("Passed params",navParams.data );
+    this.patientid = navParams.data;
   }
 
+  ionViewDidLoad() {
+    
+  }
+
+  newCase(hospitalid:number){
+      this.navCtrl.push(this.newCases,{patientid:this.patientid,hospitalid:hospitalid});
+      // this.navCtrl.push(this.newappointment,{userid:'65'});
+      // console.log('el id del hospital es:',hospitalid);
+    }
 }

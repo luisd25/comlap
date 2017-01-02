@@ -8,16 +8,40 @@
 
   <ion-navbar>
     <ion-title>List Of Appointment</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="addAppointment()"><ion-icon name="add"></ion-icon>Add Appointment</button>
+  </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <h1>TODO: Detail of list of appointment</h1>
+
+  <ion-card>
+  <ion-card-header>
+   <h1> {{this.currentcases.casetitle}}</h1>
+  </ion-card-header>
+
   <ion-list>
-    <ion-item *ngFor="let item of items">
-      <button ion-item (click)="showAppointment()">{{item.specialty}}</button>
-    </ion-item>
+    <button ion-item>
+      {{this.currentcases.casedescription}}
+      {{this.currentcases.casestartdate}}
+      
+    </button>
+
   </ion-list>
+</ion-card>
+  <ion-list no-lines>
+        <ion-item *ngFor="let item of items">
+            <ion-avatar item-left>
+                <ion-icon name="md-book"></ion-icon>
+            </ion-avatar>
+            <button ion-item (click)="ShowAppointment(item)">
+                <h2>{{item.apttitle}}</h2>
+                <p>{{item.aptstartdate}}</p>
+
+            </button>
+        </ion-item>
+    </ion-list>
 </ion-content>

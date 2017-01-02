@@ -5,6 +5,7 @@ import {Http, Response} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import { AlertController } from 'ionic-angular';
 
+
 /*
   Generated class for the ListOfAppointment page.
 
@@ -24,14 +25,12 @@ export class ListOfAppointmentPage {
   is_auth_error:boolean = false;
   auth_status:string = null;
   loggedInUser: string = '';
+  hospitalid:number;
+  public currentcases:any;
   public items:any[] = [];
   
   constructor(public navCtrl: NavController, public navParams: NavParams,private backandService:BackandService
               ,public alertCtrl: AlertController) {
-
-                this.auth_type = backandService.getAuthType();
-                this.auth_status = backandService.getAuthStatus();
-                this.loggedInUser = backandService.getUsername();
               }
 
   
@@ -39,15 +38,15 @@ export class ListOfAppointmentPage {
       let filter =
           [
             {
-              fieldName: 'userid',
+              fieldName: 'caseid',
               operator: 'equals',
-              value: this.userid
+              value: this.currentcases.caseid
               
             }
           ]
       ;
       
-      this.backandService.getList('appointments',null,null,filter)
+      this.backandService.getList('appointment',null,null,filter)
            .subscribe(
                data => {
                    console.log(data);
@@ -60,8 +59,8 @@ export class ListOfAppointmentPage {
   }
   
   public currentUserId(){
-    if(this.navParams.get('userid')){
-      this.userid = this.navParams.get('userid');
+    if(this.navParams.get('currentcases')){
+      this.currentcases = this.navParams.get('currentcases');
       this.listAppointment();
     }
     else{

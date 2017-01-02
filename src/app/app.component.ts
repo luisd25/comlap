@@ -3,13 +3,13 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 
 import { TabsPage } from '../pages/tabs/tabs';
-import { ProfilePage } from '../pages/profile/profile';
-import {NewAppointmentPage} from '../new-appointment/new-appointment';
-import {ListOfAppointmentPage} from '../list-of-appointment/list-of-appointment';
+// import { ProfilePage } from '../pages/profile/profile';
+// import {NewAppointmentPage} from '../new-appointment/new-appointment';
+// import {ListOfAppointmentPage} from '../list-of-appointment/list-of-appointment';
 
 import { NavController } from 'ionic-angular';
 import {BackandService} from '../providers/backandService'
-import { HospitalPage } from '../pages/hospital/hospital';
+// import { HospitalPage } from '../pages/hospital/hospital';
 
 @Component({
   template: `<ion-nav #myNav [root]="rootPage"></ion-nav>`

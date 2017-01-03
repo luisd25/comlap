@@ -138,6 +138,10 @@ export class ProfilePage {
 
     }
 
+    signout(){
+      this.navCtrl.pop();
+    }
+
   showAlert(titlep:string,subTitlep:string) {
     let alert = this.alertCtrl.create({
       title: titlep,

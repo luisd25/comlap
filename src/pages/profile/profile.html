@@ -8,12 +8,12 @@
       <ion-icon name='menu'></ion-icon>
   </button>
   <ion-buttons end>
-      <button ion-button (click)="addMarker()"><ion-icon name="add"></ion-icon>Add Marker</button>
+      <button ion-button (click)="enabledEdit()"><ion-icon name="create" class="editButton"></ion-icon></button>
   </ion-buttons>
 </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding >
 
   <!--Menu-->
   <ion-menu [content]="mycontent" persistent >
@@ -30,11 +30,9 @@
       <ion-list>
         
         <button ion-item class='username' disabled >{{this.userName}}</button>
-        <button ion-item>Profile</button>
-        <button ion-item (click)="mapview()">Hospitales</button>
-        <button ion-item (click)="newAppointment()"> New Appointment</button>
-        <button ion-item (click)="listOfAppointment()">List Of Apointment</button>
-        <button ion-item>Log Out</button>
+        <button ion-item class='profileButton' menuToggle >Profile</button>
+        <button ion-item class='hospitalesButton'(click)="mapview()">Hospitales</button>
+        <button ion-item class='signoutButton'(click)="signout()">Log Out</button>
 
       </ion-list>
     </ion-content>
@@ -47,13 +45,6 @@
     </ion-avatar>
  <ion-list>
        
-
-       <div align="center">  
-          <button ion-button icon-only (click)="enabledEdit()" >
-              <ion-icon name='create'></ion-icon>
-          </button>
-       </div>
-
         <ion-item>
             <ion-label floating>User Name</ion-label>
             <ion-input type="text" value={{this.userName}} (input)="username = $event.target.value" [disabled]="!this.enablefields"></ion-input>
@@ -75,12 +66,6 @@
            <ion-icon name="refresh"></ion-icon> Update   
         </button>
         
-        
-
-        <!--<ion-item>
-            <ion-label floating>Password</ion-label>
-            <ion-input  (input)="password = $event.target.value" type="password"></ion-input>
-        </ion-item>-->
 
     </ion-list>
 

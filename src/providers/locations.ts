@@ -7,7 +7,7 @@ import { Geolocation } from 'ionic-native';
 @Injectable()
 export class Locations {
  
-    hospitalList: any;
+    public hospitalList: any;
  
     constructor(public backandService:BackandService,public http: Http) {
  
@@ -63,7 +63,7 @@ export class Locations {
             lat: position.coords.latitude, 
             lng:  position.coords.longitude
         };
-        console.log(position.coords.latitude, position.coords.longitude);
+        // console.log(position.coords.latitude, position.coords.longitude);
         locations.map((location) => {
  
             let placeLocation = {
@@ -78,8 +78,12 @@ export class Locations {
             ).toFixed(2);
         });
  
+        locations.sort((locationA, locationB) => {
+                    return locationA.distance - locationB.distance;
+                });
+        
         return locations;
-
+        
         
         
         });
@@ -127,8 +131,10 @@ export class Locations {
         Math.sin(dLon / 2);
         let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         let d = R * c;
- 
+        
         return d;
+        
+      
  
     }
  

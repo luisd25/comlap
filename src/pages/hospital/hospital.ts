@@ -18,7 +18,7 @@ export class HospitalPage {
   tab1Root: any = MapPage;
   tab2Root: any = ListhospitalPage;
   patientid:number;
-
+  user:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
      
@@ -31,6 +31,11 @@ export class HospitalPage {
         
       }
       else{
+      }
+      
+      if(this.navParams.get('user')){
+        this.user = this.navParams.get('user');
+        
       }
   }
 

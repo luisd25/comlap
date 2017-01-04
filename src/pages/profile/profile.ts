@@ -31,26 +31,29 @@ export class ProfilePage {
   newappointment = NewAppointmentPage;
   listappointment= ListOfAppointmentPage;
   hospitalTabs= HospitalPage;
-
+  user:any;
   constructor(public backandService:BackandService,public navCtrl: NavController, public navParams: NavParams
   ,public alertCtrl: AlertController) {}
 
   
   
     ngOnInit() {
+
+      
       if(this.navParams.get('user')){
-        this.usertype = this.navParams.get('user').usertype;
+        this.user = this.navParams.get('user');
+        this.usertype = this.user.usertype;
         let filter =
           [
             {
               fieldName: 'userid',
               operator: 'in',
-              value: this.navParams.get('user').userid
+              value: this.user.userid
             }
           ]
       ;
 
-      this.backandService.getList('patient',null,null,filter)
+      this.backandService.getList(this.usertype,null,null,filter)
            .subscribe(
                data => {
                    console.log(data);
@@ -60,7 +63,11 @@ export class ProfilePage {
                ()=> this.currentUserDetail()
            );
 
-      } 
+      }
+      else{
+            console.log('Profile:','No hay parametros');
+        }
+
     }
 
     public currentUserDetail(){
@@ -73,7 +80,6 @@ export class ProfilePage {
     newAppointment(){
       this.navCtrl.push(this.newappointment,{userid:this.currentUser.patientid});
       // this.navCtrl.push(this.newappointment,{userid:'65'});
-
     }
     listOfAppointment(){
       this.navCtrl.push(this.listappointment,{userid:this.currentUser.userid});
@@ -81,7 +87,8 @@ export class ProfilePage {
     }
 
     mapview(){
-      this.navCtrl.push(this.hospitalTabs,{patientid:this.currentUser.patientid});
+      this.navCtrl.push(this.hospitalTabs,{patientid:this.currentUser.patientid,user:this.user});
+      // console.log('envio parametros al mapa:',this.user);
       // this.navCtrl.push(this.listappointment,{userid:'65'});
       // console.log('envio mi usuario actual',this.currentUser.userid);
     }
@@ -89,6 +96,7 @@ export class ProfilePage {
       this.enablefields = !this.enablefields;
       // return this.enablefields;
     }
+
     update(){
        
       this.currentUser.username = this.userName;

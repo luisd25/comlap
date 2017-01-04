@@ -1,7 +1,9 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Locations } from '../../providers/locations';
 import { GoogleMaps } from '../../providers/google-maps';
-import { NavController, Platform } from 'ionic-angular';
+import { NavController,NavParams, Platform,App } from 'ionic-angular';
+import {ProfilePage} from '../profile/profile';
+
  
 @Component({
   selector: 'page-map',
@@ -11,9 +13,12 @@ export class MapPage {
  
     @ViewChild('map') mapElement: ElementRef;
     @ViewChild('pleaseConnect') pleaseConnect: ElementRef;
+    user:any;
+    profilePage = ProfilePage;
  
-    constructor(public navCtrl: NavController, public maps: GoogleMaps, public platform: Platform, public locations: Locations) {
- 
+    constructor(public navCtrl: NavController,public appCtrl: App, public navParams: NavParams, public maps: GoogleMaps, public platform: Platform, public locations: Locations) {
+        this.user = navParams.data;
+        // console.log('parametro: ',navParams.data);
     }
  
     ionViewDidLoad(){
@@ -42,6 +47,12 @@ export class MapPage {
  
         });
  
+    }
+    Back(){
+        
+        
+        // this.navCtrl.push(this.profilePage,{user:this.user});
+        this.appCtrl.getRootNav().push(this.profilePage,{user:this.user});
     }
  
 }

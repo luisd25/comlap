@@ -67,6 +67,7 @@ export class SignupPage {
    }
 
 
+
   showAlert(titlep:string,subTitlep:string) {
   let alert = this.alertCtrl.create({
     title: titlep,

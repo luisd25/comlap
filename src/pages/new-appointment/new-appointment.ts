@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import {BackandService} from '../../providers/backandService'
+import {ComlapService} from '../../providers/comlap.service'
 import {Http, Response} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import { AlertController } from 'ionic-angular';
@@ -23,13 +23,16 @@ export class NewAppointmentPage {
   patientid:number;
   caseid:number;
   public items:any[] = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams,private backandService:BackandService
+  constructor(public navCtrl: NavController, public navParams: NavParams,private comlapService:ComlapService
               ,public alertCtrl: AlertController) {}
 
   sendAppointment(){
     // this.showAlert('',this.myDate);
-    this.backandService.create('appointment', {apttitle:this.apttitle, aptdetail: this.description,specialty:this.specialty
-                                            ,aptstartdate: this.myDate,patientid:this.patientid,caseid:this.caseid}).subscribe(
+    this.comlapService.create('appointment', {apttitle:this.apttitle, aptdetail: this.description
+                                              ,specialty:this.specialty
+                                            ,aptstartdate: this.myDate
+                                            ,patientid:this.patientid
+                                            ,caseid:this.caseid}).subscribe(
 
                data => {
                   // alert('connected');
@@ -39,7 +42,7 @@ export class NewAppointmentPage {
 
                },
 
-               err => this.backandService.logError(err),
+               err => this.comlapService.logError(err),
 
                () => this.navCtrl.pop()
 

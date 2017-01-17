@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import {BackandService} from '../../providers/backandService'
+import {ComlapService} from '../../providers/comlap.service'
 import {Http, Response} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import { AlertController } from 'ionic-angular';
@@ -31,7 +31,7 @@ export class ListOfAppointmentPage {
   public items:any[] = [];
   newAppointment = NewAppointmentPage;
   
-  constructor(public navCtrl: NavController, public navParams: NavParams,private backandService:BackandService
+  constructor(public navCtrl: NavController, public navParams: NavParams,private comlapService:ComlapService
               ,public alertCtrl: AlertController) {
               }
 
@@ -40,21 +40,21 @@ export class ListOfAppointmentPage {
       let filter =
           [
             {
-              fieldName: 'caseid',
+              fieldName: 'id',
               operator: 'equals',
-              value: this.currentcases.caseid
+              value: this.currentcases.id
               
             }
           ]
       ;
       
-      this.backandService.getList('appointment',null,null,filter)
+      this.comlapService.getList('appointment','id','eq',this.currentcases.id)
            .subscribe(
                data => {
                    console.log(data);
                    this.items = data;
                },
-               err => this.backandService.logError(err),
+               err => this.comlapService.logError(err),
                ()=> console.log('Ok. list selected')
            );
 
@@ -84,7 +84,7 @@ export class ListOfAppointmentPage {
   }
   addAppointment(){
 
-      this.navCtrl.push(this.newAppointment,{patientid:this.currentcases.patientid,caseid:this.currentcases.caseid});
+      this.navCtrl.push(this.newAppointment,{patientid:this.currentcases.patientid,caseid:this.currentcases.id});
     
   }
 

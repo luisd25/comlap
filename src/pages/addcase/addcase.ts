@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import {BackandService} from '../../providers/backandService'
+import {ComlapService} from '../../providers/comlap.service'
 
 /*
   Generated class for the Addcase page.
@@ -22,7 +22,7 @@ export class AddcasePage {
   myDate:string;
   casecomments:string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private backandService:BackandService) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams,private comlapservice:ComlapService) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddcasePage');
@@ -65,7 +65,7 @@ export class AddcasePage {
         return;
       }
 
-       this.backandService.create('cases', {hospitalid:this.hospitalid,casetitle: this.casetitle
+       this.comlapservice.create('cases', {hospitalid:this.hospitalid,casetitle: this.casetitle
                                             , casedescription:this.casedescription
                                             ,casestartdate: this.myDate,specialty:this.specialty
                                             ,casecomments:this.casecomments,patientid:this.patientid}).subscribe(
@@ -74,7 +74,7 @@ export class AddcasePage {
                   // this.showAlert('Success :D','You can now loggin.');
                },
 
-               err => this.backandService.logError(err),
+               err => this.comlapservice.logError(err),
 
                () => this.navCtrl.pop()
 

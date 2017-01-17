@@ -22,17 +22,17 @@
      <ion-title>Pages</ion-title>
    </ion-toolbar>
  </ion-header>
-    <ion-content>
+    <ion-content class="menu">
       <ion-avatar>
         <img class='profile' src="img/male-user.png">
       </ion-avatar>
 
-      <ion-list>
+      <ion-list id="list">
         
-        <button ion-item class='username' disabled >{{this.userName}}</button>
-        <button ion-item class='profileButton' menuToggle >Profile</button>
-        <button ion-item class='hospitalesButton'(click)="mapview()">Hospitales</button>
-        <button ion-item class='signoutButton'(click)="signout()">Log Out</button>
+        <button ion-item class='username' id="list" disabled >{{this.userName}}</button>
+        <button ion-item class='profileButton'id="list"  menuToggle >Profile</button>
+        <button ion-item class='hospitalesButton'id="list"(click)="mapview()">Hospitales</button>
+        <button ion-item class='signoutButton'id="list" (click)="signout()">Log Out</button>
 
       </ion-list>
     </ion-content>

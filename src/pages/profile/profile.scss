@@ -3,12 +3,12 @@ page-profile {
     background-image: url('../img/blur-bg-mobile.jpg');
   }
 
-  background-image: url('../img/blur-bg-mobile.jpg');
   .profile_image{
   margin-top: 20%;
 }
 
 .profile{
+  // background-color: darkcyan;
   margin-left: 25%;
   margin-bottom: 10%;
   display:inline-block;
@@ -16,6 +16,9 @@ page-profile {
   width:60%;
   height:60%;
   background-size:cover;
+}
+.menu{
+  background-image: url('../img/blur-bg-mobile.jpg');
 }
 .username{
   text-align: center;

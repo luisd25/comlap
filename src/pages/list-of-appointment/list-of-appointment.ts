@@ -48,7 +48,7 @@ export class ListOfAppointmentPage {
           ]
       ;
       
-      this.comlapService.getList('appointment','id','eq',this.currentcases.id)
+      this.comlapService.getList('appointment','caseid','eq',this.currentcases.id)
            .subscribe(
                data => {
                    console.log(data);

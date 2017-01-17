@@ -1,10 +1,31 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Slides</ion-title>
+  </ion-navbar>
+</ion-header>
 
-<ion-navbar *navbar>
-  <ion-title>
-    Home
-  </ion-title>
-</ion-navbar>
+<ion-content class="tutorial-page">
 
-<ion-content class="HomePage">
-	<h1>TODO: ADD SLIDER TO SHOW WHAT WE CAN DO AS HOME</h1>
+  <ion-slides pager>
+    <ion-slide *ngFor="let slide of slides">
+      <ion-toolbar>
+        <ion-buttons end>
+          <button ion-button color="primary">Skip</button>
+        </ion-buttons>
+      </ion-toolbar>
+      <img [src]="slide.image" class="slide-image"/>
+      <h2 class="slide-title" [innerHTML]="slide.title"></h2>
+      <p [innerHTML]="slide.description"></p>
+    </ion-slide>
+    <ion-slide>
+      <ion-toolbar>
+      </ion-toolbar>
+      <img src="img/ica-slidebox-img-4.png" class="slide-image"/>
+      <h2 class="slide-title">Ready to Play?</h2>
+      <button ion-button large clear icon-right color="primary">
+        Continue
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-slide>
+  </ion-slides>
 </ion-content>

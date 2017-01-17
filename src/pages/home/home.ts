@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import { NavController, Nav , Tabs } from 'ionic-angular';
 
 
 @Component({
@@ -28,5 +29,14 @@ export class HomePage {
       image: "img/valores2.png",
     }
   ];
+  tab:Tabs;
+      constructor(public navCtrl: NavController){
+         this.tab = this.navCtrl.parent;
+      }
+
+      goToLogin(){
+        this.tab.select(1)
+      } 
+            
 
 }

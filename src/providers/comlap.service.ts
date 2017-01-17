@@ -13,17 +13,23 @@ export class ComlapService {
   getList(object: string, 
           filter: any = null,
           operator:any = null,
-          value:any = null) {
+          value:any = null
+          ,filter2:any=null,
+          operator2:any = null,
+          value2:any = null) {
           let queryParams : string[] = [];
           let query: string = '';
 
         if (filter){
             queryParams.push("$filter="+filter+"%20"+operator+"%20"+"'"+ value+"'");
         }
+        if (filter2){
+            queryParams.push(" and "+filter2+"%20"+operator2+"%20"+"'"+ value2+"'");
+        }
         if (queryParams.length > 0){
             query = '?' + queryParams.join('&');
         }
-        // console.log( query);
+        console.log( query);
         return this.http.get(this.url + object + query, {
                         headers: this.authHeader
                     })

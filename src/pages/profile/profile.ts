@@ -78,7 +78,7 @@ export class ProfilePage {
     }
 
     mapview(){
-      this.navCtrl.push(this.hospitalTabs,{patientid:this.currentUser.patientid,user:this.user});
+      this.navCtrl.push(this.hospitalTabs,{patientid:this.currentUser.id,user:this.user});
       // console.log('envio parametros al mapa:',this.user);
       // this.navCtrl.push(this.listappointment,{userid:'65'});
       // console.log('envio mi usuario actual',this.currentUser.userid);

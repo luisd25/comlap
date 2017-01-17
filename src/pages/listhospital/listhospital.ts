@@ -30,6 +30,7 @@ export class ListhospitalPage {
   newCase(hospitalid:number){
       this.navCtrl.push(this.newCases,{patientid:this.patientid,hospitalid:hospitalid});
       // this.navCtrl.push(this.newappointment,{userid:'65'});
-      // console.log('el id del hospital es:',hospitalid);
+      console.log('el id del hospital es:',hospitalid);
+      console.log(this.locations)
     }
 }

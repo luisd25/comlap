@@ -7,28 +7,26 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>New Appointment</ion-title>
+    <ion-title>Nueva Cita</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-<h1>Welcome to the appointment Page</h1>
-
+<ion-content padding class="NewAppointment">
 
 <ion-list>
-    <ion-item>
+    <ion-item id="list">
       <ion-label floating>Titulo</ion-label>
       <ion-input type="text" (input)="apttitle = $event.target.value"></ion-input>
   </ion-item>
-  <ion-item>
+  <ion-item id="list">
     <ion-label floating>Description</ion-label>
     <ion-textarea (input)="description = $event.target.value"></ion-textarea>
  </ion-item>
 
 
-  <ion-item>
+  <ion-item id="list">
     <ion-label>Area</ion-label>
     <ion-select [(ngModel)]="specialty" (input)="specialty = $event.target.value">
       <ion-option value="Orthodontics">Orthodontics</ion-option>
@@ -39,13 +37,13 @@
       <ion-option value="Cardiology">Cardiology</ion-option>
     </ion-select>
   </ion-item>
-  <ion-item>
+  <ion-item id="list">
     <ion-label>Start Time</ion-label>
     <ion-datetime displayFormat="MM/DD/YYYY HH" pickerFormat="MMM DD YYYY HH" [(ngModel)]="myDate">>
     </ion-datetime>
   </ion-item>
 
-  <button ion-button full (click)="sendAppointment()">Send Appointment</button>
+  <button ion-button full (click)="sendAppointment()" color="light">Enviar Cita</button>
 </ion-list>
 
 </ion-content>

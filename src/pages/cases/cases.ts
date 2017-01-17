@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import {BackandService} from '../../providers/backandService'
 import {ListOfAppointmentPage} from '../list-of-appointment/list-of-appointment';
 import { AddcasePage } from '../addcase/addcase'
-
+import {ComlapService} from '../../providers/comlap.service'
 /*
   Generated class for the Cases page.
 
@@ -21,7 +20,7 @@ export class CasesPage {
   hospitalid:number;
   listappointment= ListOfAppointmentPage;
   addcase = AddcasePage;
-  constructor(public navCtrl: NavController, public navParams: NavParams,private backandService:BackandService) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams,private comlapService:ComlapService) {}
 
   ngOnInit() {
       this.currentPatientId();
@@ -60,14 +59,14 @@ export class CasesPage {
             }
           ]
       ;
-      
-      this.backandService.getList('cases',null,null,filter)
+      // ,'patientid','eq',this.patientid
+      this.comlapService.getList('cases','hospitalid','eq',this.hospitalid,'patientid','eq',this.patientid)
            .subscribe(
                data => {
                    console.log('lista de casos:',data);
                    this.items = data;
                },
-               err => this.backandService.logError(err),
+               err => this.comlapService.logError(err),
                ()=> console.log('Ok.')
            );
 

@@ -7,29 +7,26 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>New Appointment</ion-title>
+    <ion-title>Nuevo Caso</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-<h1>Welcome to the Add Case Page</h1>
-
-
+<ion-content padding class="Addcase">
 <ion-list>
-  <ion-item>
+  <ion-item id="list">
       <ion-label floating>Titulo</ion-label>
       <ion-input type="text" (input)="casetitle = $event.target.value"></ion-input>
   </ion-item>
   
-  <ion-item>
+  <ion-item id="list">
     <ion-label floating>Description</ion-label>
     <ion-textarea (input)="casedescription = $event.target.value"></ion-textarea>
  </ion-item>
 
 
-  <ion-item>
+  <ion-item id="list">
     <ion-label>Area</ion-label>
     <ion-select [(ngModel)]="specialty" (input)="specialty = $event.target.value">
       <ion-option value="Orthodontics">Orthodontics</ion-option>
@@ -39,20 +36,20 @@
       <ion-option value="Neurology">Neurology</ion-option>
       <ion-option value="Cardiology">Cardiology</ion-option>
     </ion-select>
-  </ion-item>
+  </ion-item >
   
-  <ion-item>
+  <ion-item id="list">
     <ion-label>Start Time</ion-label>
     <ion-datetime displayFormat="MM/DD/YYYY HH" pickerFormat="MMM DD YYYY HH" [(ngModel)]="myDate">>
     </ion-datetime>
   </ion-item>
 
-  <ion-item>
+  <ion-item id="list">
     <ion-label floating>Comentario</ion-label>
     <ion-textarea (input)="casecomments = $event.target.value"></ion-textarea>
  </ion-item>
 
-  <button ion-button full (click)="sendCase()">Send Appointment</button>
+  <button ion-button full (click)="sendCase()" color="light"><p color="primary">Enviar Caso</p></button>
 </ion-list>
 
 </ion-content>

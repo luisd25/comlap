@@ -7,7 +7,7 @@
       <img src="img/logo_white.png"/>
     </div>
 
-    <ion-list style="margin-top:10%" >
+    <ion-list style="margin-top:10%">
         <ion-item id="list">
             <ion-label floating>Username</ion-label>
             <ion-input type="text"  (input)="username = $event.target.value"></ion-input>
@@ -21,6 +21,6 @@
     </ion-list>
 
     <button ion-button icon-left full (click)="loginUser()" color="light">
-      <ion-icon name="home"></ion-icon> Login   </button>
+      <ion-icon name="home" color="primary"></ion-icon><p color="primary">Login</p></button>
 
 </ion-content>

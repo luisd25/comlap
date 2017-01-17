@@ -7,23 +7,23 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>cases</ion-title>
+    <ion-title>Casos</ion-title>
     
     <ion-buttons end>
-      <button ion-button (click)="addCase()"><ion-icon name="add"></ion-icon>Add Case</button>
+      <button ion-button (click)="addCase()"><ion-icon name="add" color="primary"></ion-icon><p color="primary">Agregar Caso</p></button>
   </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-      <ion-list no-lines>
-        <ion-item *ngFor="let item of items">
-            <ion-avatar item-left>
+<ion-content padding class="cases">
+      <ion-list no-lines id="list">
+        <ion-item *ngFor="let item of items" id="list">
+            <ion-avatar id="list" item-left>
                 <ion-icon name="md-book"></ion-icon>
             </ion-avatar>
-            <button ion-item (click)="listOfAppointment(item)">
+            <button id="list" ion-item (click)="listOfAppointment(item)">
                 <h2>{{item.casetitle}}</h2>
                 <p>{{item.casedescription}}</p>
 

@@ -42,11 +42,12 @@ export class ProfilePage {
       if(this.navParams.get('user')){
         this.user = this.navParams.get('user');
         this.usertype = this.user.usertype;
+    
 
-      this.comlapService.getList(this.usertype,'userid','in',this.user.userid)
+      this.comlapService.getList(this.usertype,'userid','eq',this.user.id)
            .subscribe(
                data => {
-                   console.log(data);
+                   console.log('perfil del usuario: ',data);
                    this.currentUser = data[0];
                },
                err => this.comlapService.logError(err),
@@ -120,7 +121,7 @@ export class ProfilePage {
     }
 
 
-      this.comlapService.update('patient', this.currentUser.patientid,updateobject)
+      this.comlapService.update('patient', this.currentUser.id,updateobject)
         .subscribe(
                 data => {
                   console.log(data);

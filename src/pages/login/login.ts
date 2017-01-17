@@ -38,7 +38,7 @@ export class LoginPage {
       this.comlapService.getList('users','username','eq',this.username)
            .subscribe(
                data => {
-                   console.log(data);
+                   console.log('usuario logeado: ',data);
                    this.items = data;
                },
                err => this.comlapService.logError(err),

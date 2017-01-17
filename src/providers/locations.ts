@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import {BackandService} from './backandService'
+import {ComlapService} from './comlap.service'
 import { Geolocation } from 'ionic-native';
  
 @Injectable()
@@ -9,7 +9,7 @@ export class Locations {
  
     public hospitalList: any;
  
-    constructor(public backandService:BackandService,public http: Http) {
+    constructor(public comlapService:ComlapService,public http: Http) {
  
     }
  
@@ -20,17 +20,8 @@ export class Locations {
         }
  
         return new Promise(resolve => {
-                    let filter =
-                [
-                    {
-                    fieldName: "Provincia",
-                    operator: "contains",
-                    value: "SANTO DOMINGO"
-                    }
-                ]
-            ;
 
-            this.backandService.getList('hospital',280,null,filter)
+            this.comlapService.getList('hospital','Provincia','eq','SANTO DOMINGO')
            .subscribe(
                data => {
                    console.log(data);
@@ -42,7 +33,7 @@ export class Locations {
  
                 resolve(this.hospitalList);
                },
-               err => this.backandService.logError(err),
+               err => this.comlapService.logError(err),
                ()=> console.log('loaded hospital')
 
             

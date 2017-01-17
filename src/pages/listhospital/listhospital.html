@@ -10,13 +10,13 @@
 <ion-content>
  
     <ion-list no-lines>
-        <ion-item *ngFor="let location of locations.hospitalList ">
-            <ion-avatar item-left>
+        <ion-item id="list" *ngFor="let location of locations.hospitalList ">
+            <ion-avatar item-left id="list">
                 <ion-icon name="pin"></ion-icon>
             </ion-avatar>
-            <button ion-item (click)="newCase(location.hospitalid)">
+            <button ion-item id="list" (click)="newCase(location.hospitalid)">
                 <h2>{{location.NombreCentro}}</h2>
-                <p>{{location.distance}} kilometers</p>
+                <p color="light">{{location.distance}} kilometers</p>
 
             </button>
         </ion-item>

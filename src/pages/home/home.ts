@@ -8,19 +8,24 @@ import {Component} from '@angular/core';
 export class HomePage {
     slides = [
     {
-      title: "Welcome to the Docs!",
-      description: "The <b>Ionic Component Documentation</b> showcases a number of useful components that are included out of the box with Ionic.",
-      image: "img/ica-slidebox-img-1.png",
+      title: "Bienvenido a COMLAP",
+      description: "La <b>Consulting Online Machine Learning Analytics Prediction</b>. Aplicación",
+      image: "img/welcome2.png",
     },
     {
-      title: "What is Ionic?",
-      description: "<b>Ionic Framework</b> is an open source SDK that enables developers to build high quality mobile apps with web technologies like HTML, CSS, and JavaScript.",
-      image: "img/ica-slidebox-img-2.png",
+      title: "Nuestra Mision?",
+      description: "Eficientizar el proceso de visita al médica, reducir  los tiempo de espera en cita y notificar al cliente de los resultados.",
+      image: "img/mision3.png",
     },
     {
-      title: "What is Ionic Cloud?",
-      description: "The <b>Ionic Cloud</b> is a cloud platform for managing and scaling Ionic apps with integrated services like push notifications, native builds, user auth, and live updating.",
-      image: "img/ica-slidebox-img-3.png",
+      title: "Nuestros Vision?",
+      description: "Mantener operando nuestro modelo de negocios a nivel mundial, cumpliendo con los estándares de calidad establecida y cumpliendo las leyes regulatorias dentro del marco en que se encuentra.",
+      image: "img/vision2.png",
+    },
+    {
+      title: "Nuestros Valores?",
+      description: "Somos un grupo de personas que quieren hacer un cambio en el mundo de la medicina debido a la falta de atención rápida que muchos reciben, creando entonces nuestra plataforma de COMLAP para cubrir todas esas necesidades.",
+      image: "img/valores2.png",
     }
   ];
 

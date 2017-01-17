@@ -6,7 +6,8 @@ import {ProfilePage} from '../profile/profile';
 // import {bootstrap} from '@angular/platform-browser-dynamic';
 //To do : limit imports
 import 'rxjs/Rx'
-import {BackandService} from '../../providers/backandService'
+import {ComlapService} from '../../providers/comlap.service'
+
 
 @Component({
     templateUrl: 'login.html',
@@ -26,44 +27,25 @@ export class LoginPage {
 
 
 
-    constructor(public backandService:BackandService,public alertCtrl: AlertController,public navCtrl: NavController, public viewCtrl: ViewController,public appCtrl: App) {
-
-        this.auth_type = backandService.getAuthType();
-        this.auth_status = backandService.getAuthStatus();
-        this.loggedInUser = backandService.getUsername();
-        // this.viewCtrl = this.ViewController();
+    constructor(public comlapService:ComlapService,public alertCtrl: AlertController,public navCtrl: NavController, public viewCtrl: ViewController,public appCtrl: App) {
 
     }
 
 
     public loginUser(){
-      let filter =
-          [
-            {
-              fieldName: 'username',
-              operator: 'contains',
-              value: this.username
-            }
-          ]
-      ;
+      
 
-      this.backandService.getList('users',null,null,filter)
+      this.comlapService.getList('users','username','eq',this.username)
            .subscribe(
                data => {
                    console.log(data);
                    this.items = data;
                },
-               err => this.backandService.logError(err),
+               err => this.comlapService.logError(err),
                ()=> this.validateUser()
            );
 
   }
-
-
-    public signOut() {
-        this.auth_status = null;
-        this.backandService.signout();
-    }
 
     showAlert(titlep:string,subTitlep:string) {
     let alert = this.alertCtrl.create({
@@ -73,6 +55,7 @@ export class LoginPage {
     });
     alert.present();
   }
+
   validateUser(){
         let failed = 0;
         let position = 0;

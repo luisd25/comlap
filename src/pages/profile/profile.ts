@@ -4,8 +4,7 @@ import { AlertController } from 'ionic-angular';
 import {NewAppointmentPage} from '../new-appointment/new-appointment';
 import {ListOfAppointmentPage} from '../list-of-appointment/list-of-appointment';
 import { HospitalPage } from '../hospital/hospital';
-
-import {BackandService} from '../../providers/backandService'
+import {ComlapService} from '../../providers/comlap.service'
 
 
 /*
@@ -32,7 +31,7 @@ export class ProfilePage {
   listappointment= ListOfAppointmentPage;
   hospitalTabs= HospitalPage;
   user:any;
-  constructor(public backandService:BackandService,public navCtrl: NavController, public navParams: NavParams
+  constructor(public comlapService:ComlapService,public navCtrl: NavController, public navParams: NavParams
   ,public alertCtrl: AlertController) {}
 
   
@@ -43,23 +42,14 @@ export class ProfilePage {
       if(this.navParams.get('user')){
         this.user = this.navParams.get('user');
         this.usertype = this.user.usertype;
-        let filter =
-          [
-            {
-              fieldName: 'userid',
-              operator: 'in',
-              value: this.user.userid
-            }
-          ]
-      ;
 
-      this.backandService.getList(this.usertype,null,null,filter)
+      this.comlapService.getList(this.usertype,'userid','in',this.user.userid)
            .subscribe(
                data => {
                    console.log(data);
                    this.currentUser = data[0];
                },
-               err => this.backandService.logError(err),
+               err => this.comlapService.logError(err),
                ()=> this.currentUserDetail()
            );
 
@@ -130,12 +120,12 @@ export class ProfilePage {
     }
 
 
-      this.backandService.update('patient', this.currentUser.patientid,updateobject)
+      this.comlapService.update('patient', this.currentUser.patientid,updateobject)
         .subscribe(
                 data => {
                   console.log(data);
                 },
-                err => this.backandService.logError(err),
+                err => this.comlapService.logError(err),
                 () => this.successonUpdate()
             );
     }

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import 'rxjs/Rx'
-import {BackandService} from '../../providers/backandService'
+import {ComlapService} from '../../providers/comlap.service'
 import {Http, Response} from '@angular/http';
 import { Headers, RequestOptions } from '@angular/http';
 import {Observable} from 'rxjs/Rx';
@@ -21,7 +21,7 @@ export class SignupPage {
   public items:any[] = [];
 
 
-  constructor(public navCtrl: NavController, private nav: Nav, private backandService:BackandService
+  constructor(public navCtrl: NavController, private nav: Nav, private comlapService:ComlapService
               ,public alertCtrl: AlertController) 
               {
                 this.tab = this.navCtrl.parent;
@@ -51,14 +51,14 @@ export class SignupPage {
         return;
       }
 
-       this.backandService.create('users', {username: this.userName, email:this.email
+       this.comlapService.create('users', {username: this.userName, email:this.email
                                             ,password: this.signUpPassword,usertype:'Patient'}).subscribe(
 
                data => {
                   this.showAlert('Success :D','You can now loggin.');
                },
 
-               err => this.backandService.logError(err),
+               err => this.comlapService.logError(err),
 
                () => this.tab.select(1)
 
@@ -67,29 +67,6 @@ export class SignupPage {
    }
 
 
-  public socialSignin(provider) {
-    var $obs = this.backandService.socialSignin(provider);
-    $obs.subscribe(
-        data => {
-            console.log('Sign up succeeded with:' + provider);
-        },
-        err => {
-            this.backandService.logError(err)
-        },
-        () => console.log('Finish Auth'));
-  }
-
-  public inAppSocial(provider) {
-    var $obs = this.backandService.inAppSocial(provider);
-    $obs.subscribe(
-        data => {
-            console.log('Sign up succeeded with:' + provider);
-        },
-        err => {
-            this.backandService.logError(err)
-        },
-        () => console.log('Finish Auth'));
-  }
   showAlert(titlep:string,subTitlep:string) {
   let alert = this.alertCtrl.create({
     title: titlep,

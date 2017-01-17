@@ -1,6 +1,9 @@
 page-profile {
-  background-color: #0055BB;
-  
+  .profilecontent{
+    background-image: url('../img/blur-bg-mobile.jpg');
+  }
+
+  background-image: url('../img/blur-bg-mobile.jpg');
   .profile_image{
   margin-top: 20%;
 }

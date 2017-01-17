@@ -3,24 +3,24 @@
 </ion-navbar>
 
 <ion-content padding class="page1">
-    <div style="margin-top:10%">
+    <div style="margin-top:10%;">
       <img src="img/logo_white.png"/>
     </div>
 
-    <ion-list style="margin-top:10%">
-        <ion-item >
+    <ion-list style="margin-top:10%" >
+        <ion-item id="list">
             <ion-label floating>Username</ion-label>
             <ion-input type="text"  (input)="username = $event.target.value"></ion-input>
         </ion-item>
 
-        <ion-item>
+        <ion-item id="list">
             <ion-label floating>Password</ion-label>
             <ion-input  (input)="password = $event.target.value" type="password"></ion-input>
         </ion-item>
 
     </ion-list>
 
-    <button ion-button icon-left full (click)="loginUser()" color="success">
+    <button ion-button icon-left full (click)="loginUser()" color="light">
       <ion-icon name="home"></ion-icon> Login   </button>
 
 </ion-content>

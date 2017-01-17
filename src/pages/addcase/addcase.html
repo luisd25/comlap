@@ -1,5 +1,5 @@
 <!--
-  Generated template for the NewAppointment page.
+  Generated template for the Addcase page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,22 +7,22 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Nueva Cita</ion-title>
+    <ion-title>Nuevo Caso</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding class="NewAppointment">
-
+<ion-content padding class="Addcase">
 <ion-list>
-    <ion-item id="list">
+  <ion-item id="list">
       <ion-label floating>Titulo</ion-label>
-      <ion-input type="text" (input)="apttitle = $event.target.value"></ion-input>
+      <ion-input type="text" (input)="casetitle = $event.target.value"></ion-input>
   </ion-item>
+  
   <ion-item id="list">
     <ion-label floating>Description</ion-label>
-    <ion-textarea (input)="description = $event.target.value"></ion-textarea>
+    <ion-textarea (input)="casedescription = $event.target.value"></ion-textarea>
  </ion-item>
 
 
@@ -36,14 +36,20 @@
       <ion-option value="Neurology">Neurology</ion-option>
       <ion-option value="Cardiology">Cardiology</ion-option>
     </ion-select>
-  </ion-item>
+  </ion-item >
+  
   <ion-item id="list">
     <ion-label>Start Time</ion-label>
     <ion-datetime displayFormat="MM/DD/YYYY HH" pickerFormat="MMM DD YYYY HH" [(ngModel)]="myDate">>
     </ion-datetime>
   </ion-item>
 
-  <button ion-button full (click)="sendAppointment()" color="light">Enviar Cita</button>
+  <ion-item id="list">
+    <ion-label floating>Comentario</ion-label>
+    <ion-textarea (input)="casecomments = $event.target.value"></ion-textarea>
+ </ion-item>
+
+  <button ion-button full (click)="sendCase()" color="light"><p color="primary">Enviar Caso</p></button>
 </ion-list>
 
 </ion-content>

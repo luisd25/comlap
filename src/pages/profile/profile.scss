@@ -1,11 +1,14 @@
 page-profile {
-  background-color: #0055BB;
-  
+  .profilecontent{
+    background-image: url('../img/blur-bg-mobile.jpg');
+  }
+
   .profile_image{
   margin-top: 20%;
 }
 
 .profile{
+  // background-color: darkcyan;
   margin-left: 25%;
   margin-bottom: 10%;
   display:inline-block;
@@ -14,11 +17,18 @@ page-profile {
   height:60%;
   background-size:cover;
 }
+.menu{
+  background-image: url('../img/blur-bg-mobile.jpg');
+}
 .username{
   text-align: center;
   color: black;
   font-weight: bold;
 }
+.editButton{
+  font-size: 150%;
+}
+
 
 
 

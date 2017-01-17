@@ -1,22 +1,58 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Locations } from '../../providers/locations';
+import { GoogleMaps } from '../../providers/google-maps';
+import { NavController,NavParams, Platform,App } from 'ionic-angular';
+import {ProfilePage} from '../profile/profile';
 
-/*
-  Generated class for the Map page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+ 
 @Component({
   selector: 'page-map',
   templateUrl: 'map.html'
 })
 export class MapPage {
+ 
+    @ViewChild('map') mapElement: ElementRef;
+    @ViewChild('pleaseConnect') pleaseConnect: ElementRef;
+    user:any;
+    profilePage = ProfilePage;
+ 
+    constructor(public navCtrl: NavController,public appCtrl: App, public navParams: NavParams, public maps: GoogleMaps, public platform: Platform, public locations: Locations) {
+        this.user = navParams.data;
+        // console.log('parametro: ',navParams.data);
+    }
+ 
+    ionViewDidLoad(){
+ 
+        this.platform.ready().then(() => {
+ 
+            let mapLoaded = this.maps.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement);
+            let locationsLoaded = this.locations.load();
+ 
+            Promise.all([
+                mapLoaded,
+                locationsLoaded
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MapPage');
-  }
-
+            ]).then((result) => {
+ 
+                let locations = result[1];
+                let int = 0;
+                for(let location of locations){
+                    int++;
+                    // console.log(location.latitude, location.longitude);
+                    this.maps.addMarker(location.latitude, location.longitude,location.NombreCentro);
+                }
+                console.log(int);
+ 
+            });
+ 
+        });
+ 
+    }
+    Back(){
+        
+        
+        // this.navCtrl.push(this.profilePage,{user:this.user});
+        this.appCtrl.getRootNav().push(this.profilePage,{user:this.user});
+    }
+ 
 }

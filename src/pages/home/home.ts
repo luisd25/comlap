@@ -1,95 +1,42 @@
 import {Component} from '@angular/core';
-import {BackandService} from '../../providers/backandService'
+import { NavController, Nav , Tabs } from 'ionic-angular';
+
 
 @Component({
   templateUrl: 'home.html',
   selector: 'page-home'
 })
 export class HomePage {
-	name:string = '';
-    description:string = '';
-    public items:any[] = [];
-    searchQuery: string;
-
-    constructor(public backandService:BackandService) {
-        this.searchQuery = '';
-
-        this.backandService.on("items_updated")
-            .subscribe(
-                data => {
-                    console.log("items_updated", data);
-                    let a = data as any[];
-                    let newItem = {};
-                    a.forEach((kv)=> newItem[kv.Key] = kv.Value);
-                    this.items.unshift(newItem);
-                },
-                err => {
-                    console.log(err);
-                },
-                () => console.log('received update from socket')
-        );
-
+    slides = [
+    {
+      title: "Bienvenido a COMLAP",
+      description: "La <b>Consulting Online Machine Learning Analytics Prediction</b>. Aplicación",
+      image: "img/welcome2.png",
+    },
+    {
+      title: "Nuestra Mision?",
+      description: "Eficientizar el proceso de visita al médica, reducir  los tiempo de espera en cita y notificar al cliente de los resultados.",
+      image: "img/mision3.png",
+    },
+    {
+      title: "Nuestros Vision?",
+      description: "Mantener operando nuestro modelo de negocios a nivel mundial, cumpliendo con los estándares de calidad establecida y cumpliendo las leyes regulatorias dentro del marco en que se encuentra.",
+      image: "img/vision2.png",
+    },
+    {
+      title: "Nuestros Valores?",
+      description: "Somos un grupo de personas que quieren hacer un cambio en el mundo de la medicina debido a la falta de atención rápida que muchos reciben, creando entonces nuestra plataforma de COMLAP para cubrir todas esas necesidades.",
+      image: "img/valores2.png",
     }
+  ];
+  tab:Tabs;
+      constructor(public navCtrl: NavController){
+         this.tab = this.navCtrl.parent;
+      }
 
-    public postItem() {
-
-        this.backandService.create('todo', { name: this.name, description: this.description }).subscribe(
-                data => {
-                    // add to beginning of array
-                    this.items.unshift({ id: null, name: this.name, description: this.description });
-                    console.log(this.items);
-                    this.name = '';
-                    this.description = '';
-                },
-                err => this.backandService.logError(err),
-                () => console.log('OK')
-            );
-    }
-
-    public getItems() {
-       this.backandService.getList('user')
-            .subscribe(
-                data => {
-                    console.log(data);
-                    this.items = data;
-                },
-                err => this.backandService.logError(err),
-                () => console.log('OK')
-            );
-    }
-
-    public filterItems(searchbar) {
-        // set q to the value of the searchbar
-        var q = searchbar;
-
-        // if the value is an empty string don't filter the items
-        if (!q || q.trim() == '') {
-          return;
-        }
-        else{
-            q = q.trim();
-        }
-
-        let filter =
-            [
-              {
-                fieldName: 'name',
-                operator: 'contains',
-                value: q
-              }
-            ]
-        ;
-
-
-        this.backandService.getList('todo', null, null, filter)
-            .subscribe(
-                data => {
-                    console.log("subscribe", data);
-                    this.items = data;
-                },
-                err => this.backandService.logError(err),
-                () => console.log('OK')
-            );
-    }
+      goToLogin(){
+        this.tab.select(1)
+      } 
+            
 
 }

@@ -1,18 +1,25 @@
-<!--
-  Generated template for the Listhospital page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
+ 
   <ion-navbar>
-    <ion-title>listhospital</ion-title>
+    <ion-title>List</ion-title>
   </ion-navbar>
-
+ 
 </ion-header>
+ 
+ 
+<ion-content>
+ 
+    <ion-list no-lines>
+        <ion-item id="list" *ngFor="let location of locations.hospitalList ">
+            <ion-avatar item-left id="list">
+                <ion-icon name="pin"></ion-icon>
+            </ion-avatar>
+            <button ion-item id="list" (click)="newCase(location.hospitalid)">
+                <h2>{{location.NombreCentro}}</h2>
+                <p color="light">{{location.distance}} kilometers</p>
 
-
-<ion-content padding>
-
+            </button>
+        </ion-item>
+    </ion-list>
+ 
 </ion-content>

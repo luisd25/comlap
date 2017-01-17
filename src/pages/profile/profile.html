@@ -7,10 +7,13 @@
   <button ion-button menuToggle icon-only>
       <ion-icon name='menu'></ion-icon>
   </button>
+  <ion-buttons end>
+      <button ion-button (click)="enabledEdit()"><ion-icon name="create" class="editButton"></ion-icon></button>
+  </ion-buttons>
 </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="profilecontent">
 
   <!--Menu-->
   <ion-menu [content]="mycontent" persistent >
@@ -19,18 +22,17 @@
      <ion-title>Pages</ion-title>
    </ion-toolbar>
  </ion-header>
-    <ion-content>
+    <ion-content class="menu">
       <ion-avatar>
         <img class='profile' src="img/male-user.png">
       </ion-avatar>
 
-      <ion-list>
+      <ion-list id="list">
         
-        <button ion-item class='username' disabled >{{this.userName}}</button>
-        <button ion-item>Profile</button>
-        <button ion-item (click)="newAppointment()"> New Appointment</button>
-        <button ion-item (click)="listOfAppointment()">List Of Apointment</button>
-        <button ion-item>Log Out</button>
+        <button ion-item class='username' id="list" disabled >{{this.userName}}</button>
+        <button ion-item class='profileButton'id="list"  menuToggle >Profile</button>
+        <button ion-item class='hospitalesButton'id="list"(click)="mapview()">Hospitales</button>
+        <button ion-item class='signoutButton'id="list" (click)="signout()">Log Out</button>
 
       </ion-list>
     </ion-content>
@@ -43,40 +45,27 @@
     </ion-avatar>
  <ion-list>
        
-
-       <div align="center">  
-          <button ion-button icon-only (click)="enabledEdit()" >
-              <ion-icon name='create'></ion-icon>
-          </button>
-       </div>
-
-        <ion-item>
+        <ion-item id="list">
             <ion-label floating>User Name</ion-label>
             <ion-input type="text" value={{this.userName}} (input)="username = $event.target.value" [disabled]="!this.enablefields"></ion-input>
-        </ion-item>
-        <ion-item>
+        </ion-item >
+        <ion-item id="list">
             <ion-label floating>Name</ion-label>
             <ion-input type="text" value={{this.name}} (input)="name = $event.target.value" [disabled]="!this.enablefields"></ion-input>
-        </ion-item>
-        <ion-item>
+        </ion-item >
+        <ion-item id="list">
             <ion-label floating>LastName</ion-label>
             <ion-input type="text" value={{this.Lastname}} (input)="Lastname = $event.target.value" [disabled]="!this.enablefields"></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item id="list">
             <ion-label floating>Email</ion-label>
             <ion-input type="text" value={{this.email}} (input)="email = $event.target.value" [disabled]="!this.enablefields"></ion-input>
         </ion-item>
 
-        <button ion-button icon-left full (click)="update()" color="success" [disabled]="!this.enablefields">
-           <ion-icon name="refresh"></ion-icon> Update   
+        <button ion-button icon-left full (click)="update()" color="light" [disabled]="!this.enablefields">
+           <ion-icon name="refresh" color="primary"></ion-icon><p color="primary"> Update </p>  
         </button>
         
-        
-
-        <!--<ion-item>
-            <ion-label floating>Password</ion-label>
-            <ion-input  (input)="password = $event.target.value" type="password"></ion-input>
-        </ion-item>-->
 
     </ion-list>
 

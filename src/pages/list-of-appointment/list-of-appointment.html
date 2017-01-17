@@ -7,17 +7,41 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>List Of Appointment</ion-title>
+    <ion-title>Lista de Citas</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="addAppointment()"><ion-icon name="add" color="primary"></ion-icon><p color="primary"> Agregar Cita</p></button>
+  </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-  <h1>TODO: Detail of list of appointment</h1>
+<ion-content padding class="ListOfAppointment">
+
+  <ion-card>
+  <ion-card-header id="list">
+   <h1> {{this.currentcases.casetitle}}</h1>
+  </ion-card-header>
+
   <ion-list>
-    <ion-item *ngFor="let item of items">
-      <button ion-item (click)="showAppointment()">{{item.specialty}}</button>
-    </ion-item>
+    <button ion-item id="list">
+      {{this.currentcases.casedescription}}
+      {{this.currentcases.casestartdate}}
+      
+    </button>
+
   </ion-list>
+</ion-card>
+  <ion-list id="list" no-lines >
+        <ion-item id="list" *ngFor="let item of items">
+            <ion-avatar id="list" item-left>
+                <ion-icon name="md-book"></ion-icon>
+            </ion-avatar>
+            <button ion-item id="list" (click)="ShowAppointment(item)" disabled>
+                <h2>{{item.apttitle}}</h2>
+                <p color="light">{{item.aptstartdate}}</p>
+
+            </button>
+        </ion-item>
+    </ion-list>
 </ion-content>

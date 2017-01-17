@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import {BackandService} from '../../providers/backandService'
+import {ComlapService} from '../../providers/comlap.service'
 import {Http, Response} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import { AlertController } from 'ionic-angular';
+import {NewAppointmentPage} from '../new-appointment/new-appointment';
+
 
 /*
   Generated class for the ListOfAppointment page.
@@ -24,14 +26,13 @@ export class ListOfAppointmentPage {
   is_auth_error:boolean = false;
   auth_status:string = null;
   loggedInUser: string = '';
+  hospitalid:number;
+  public currentcases:any;
   public items:any[] = [];
+  newAppointment = NewAppointmentPage;
   
-  constructor(public navCtrl: NavController, public navParams: NavParams,private backandService:BackandService
+  constructor(public navCtrl: NavController, public navParams: NavParams,private comlapService:ComlapService
               ,public alertCtrl: AlertController) {
-
-                this.auth_type = backandService.getAuthType();
-                this.auth_status = backandService.getAuthStatus();
-                this.loggedInUser = backandService.getUsername();
               }
 
   
@@ -39,29 +40,29 @@ export class ListOfAppointmentPage {
       let filter =
           [
             {
-              fieldName: 'userid',
+              fieldName: 'id',
               operator: 'equals',
-              value: this.userid
+              value: this.currentcases.id
               
             }
           ]
       ;
       
-      this.backandService.getList('appointments',null,null,filter)
+      this.comlapService.getList('appointment','caseid','eq',this.currentcases.id)
            .subscribe(
                data => {
                    console.log(data);
                    this.items = data;
                },
-               err => this.backandService.logError(err),
+               err => this.comlapService.logError(err),
                ()=> console.log('Ok. list selected')
            );
 
   }
   
   public currentUserId(){
-    if(this.navParams.get('userid')){
-      this.userid = this.navParams.get('userid');
+    if(this.navParams.get('currentcases')){
+      this.currentcases = this.navParams.get('currentcases');
       this.listAppointment();
     }
     else{
@@ -81,7 +82,9 @@ export class ListOfAppointmentPage {
     });
     alert.present();
   }
-  showAppointment(){
+  addAppointment(){
+
+      this.navCtrl.push(this.newAppointment,{patientid:this.currentcases.patientid,caseid:this.currentcases.id});
     
   }
 

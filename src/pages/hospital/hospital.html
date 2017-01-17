@@ -1,4 +1,6 @@
+
+
 <ion-tabs>
-  <ion-tab [root]="tab1Root" tabTitle="map" tabIcon="home"></ion-tab>
-  <ion-tab [root]="tab2Root" tabTitle="listhospital" tabIcon="text"></ion-tab>
+  <ion-tab [root]="tab1Root" tabTitle="map" tabIcon="home" [rootParams]="user"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="listhospital" tabIcon="list" [rootParams]="patientid"></ion-tab>
 </ion-tabs>

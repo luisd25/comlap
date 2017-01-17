@@ -3,7 +3,8 @@ import { NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import {NewAppointmentPage} from '../new-appointment/new-appointment';
 import {ListOfAppointmentPage} from '../list-of-appointment/list-of-appointment';
-import {BackandService} from '../../providers/backandService'
+import { HospitalPage } from '../hospital/hospital';
+import {ComlapService} from '../../providers/comlap.service'
 
 
 /*
@@ -28,36 +29,36 @@ export class ProfilePage {
   public enablefields:boolean = false;
   newappointment = NewAppointmentPage;
   listappointment= ListOfAppointmentPage;
-  paciente = patient;
-
-  constructor(public backandService:BackandService,public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController) {}
+  hospitalTabs= HospitalPage;
+  user:any;
+  constructor(public comlapService:ComlapService,public navCtrl: NavController, public navParams: NavParams
+  ,public alertCtrl: AlertController) {}
 
   
   
     ngOnInit() {
-      if(this.navParams.get('user')){
-        this.usertype = this.navParams.get('user').usertype;
-        let filter =
-          [
-            {
-              fieldName: 'userid',
-              operator: 'in',
-              value: this.navParams.get('user').userid
-            }
-          ]
-      ;
 
-      this.backandService.getList('patient',null,null,filter)
+      
+      if(this.navParams.get('user')){
+        this.user = this.navParams.get('user');
+        this.usertype = this.user.usertype;
+    
+
+      this.comlapService.getList(this.usertype,'userid','eq',this.user.id)
            .subscribe(
                data => {
-                   console.log(data);
+                   console.log('perfil del usuario: ',data);
                    this.currentUser = data[0];
                },
-               err => this.backandService.logError(err),
+               err => this.comlapService.logError(err),
                ()=> this.currentUserDetail()
            );
 
-      } 
+      }
+      else{
+            console.log('Profile:','No hay parametros');
+        }
+
     }
 
     public currentUserDetail(){
@@ -70,16 +71,23 @@ export class ProfilePage {
     newAppointment(){
       this.navCtrl.push(this.newappointment,{userid:this.currentUser.patientid});
       // this.navCtrl.push(this.newappointment,{userid:'65'});
-
     }
     listOfAppointment(){
       this.navCtrl.push(this.listappointment,{userid:this.currentUser.userid});
       // this.navCtrl.push(this.listappointment,{userid:'65'});
     }
+
+    mapview(){
+      this.navCtrl.push(this.hospitalTabs,{patientid:this.currentUser.id,user:this.user});
+      // console.log('envio parametros al mapa:',this.user);
+      // this.navCtrl.push(this.listappointment,{userid:'65'});
+      // console.log('envio mi usuario actual',this.currentUser.userid);
+    }
     enabledEdit(){
       this.enablefields = !this.enablefields;
       // return this.enablefields;
     }
+
     update(){
        
       this.currentUser.username = this.userName;
@@ -111,23 +119,14 @@ export class ProfilePage {
         appointment: this.currentUser.appointment,
         username: this.currentUser.username
     }
-      // this.showAlert('',this.updateobject);
-      // this.backandService.update('patient',this.currentUser.patientid,updateobject)
-      //      .subscribe(
-      //          data => {
-      //              console.log(data);
-      //             //  this.currentUser = data[0];
-      //          },
-      //          err => this.backandService.logError(err),
-      //          ()=> this.showAlert('updated','')
-      //      );
 
-      this.backandService.update('patient', '3',updateobject)
+
+      this.comlapService.update('patient', this.currentUser.id,updateobject)
         .subscribe(
                 data => {
                   console.log(data);
                 },
-                err => this.backandService.logError(err),
+                err => this.comlapService.logError(err),
                 () => this.successonUpdate()
             );
     }
@@ -138,6 +137,10 @@ export class ProfilePage {
 
     }
 
+    signout(){
+      this.navCtrl.pop();
+    }
+
   showAlert(titlep:string,subTitlep:string) {
     let alert = this.alertCtrl.create({
       title: titlep,
@@ -146,32 +149,5 @@ export class ProfilePage {
     });
     alert.present();
   }
-
-}
-
- class patient{
-
-  
-  public	fileid: "";
-	public	sufferid: "";
-	public	userid: "7";
-	public	patientid: 3;
-	public	identification: "";
-	public	ssn: "";
-	public	firstname: "luis";
-	public	secondname: "";
-	public	lastname: "";
-	public	secondlastname: "";
-	public	gender: "";
-	public	birthdate: null;
-	public	pweight: "";
-	public	pheight: "";
-	public	telephone: "";
-	public	celphone: "";
-	public	homephone: "";
-	public	email: "123";
-	public	details: "";
-	public	appointment: null;
-	public	username: "jose";
 
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController , NavParams} from 'ionic-angular';
 import { MapPage } from '../map/map'
 import { ListhospitalPage } from '../listhospital/listhospital'
 
@@ -17,9 +17,30 @@ export class HospitalPage {
 
   tab1Root: any = MapPage;
   tab2Root: any = ListhospitalPage;
+  patientid:number;
+  user:any;
 
-  constructor(public navCtrl: NavController) {
-
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+     
   }
+
+   currentPatientId(){
+
+      if(this.navParams.get('patientid')){
+        this.patientid = this.navParams.get('patientid');
+        
+      }
+      else{
+      }
+      
+      if(this.navParams.get('user')){
+        this.user = this.navParams.get('user');
+        
+      }
+  }
+
+  ngOnInit() {
+      this.currentPatientId();    
+    }
 
 }

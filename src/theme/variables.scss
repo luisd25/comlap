@@ -32,7 +32,7 @@ $font-path: "../assets/fonts";
 // );
 
 $colors: (
-  primary:    #387ef5,
+  primary:    #6EC59B,
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
@@ -44,7 +44,9 @@ $colors: (
 // --------------------------------------------------
 // iOS only Sass variables can go here
 
-
+$label-md-text-color-focused: #ffffff;
+$text-input-md-highlight-color: #ffffff;
+// $button-text:#6EC59B;
 
 
 // App Material Design Variables
